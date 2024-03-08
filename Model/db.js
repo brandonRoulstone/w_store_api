@@ -1,0 +1,195 @@
+import { pool } from '../config/config.js'
+
+
+const getProducts = async() => {
+    const [products] = await pool.query(`
+     SELECT * FROM products
+    `);
+    return products;
+}
+
+// returns product by an id
+const getProductByID = async (id) => {
+    const [product] = await pool.query(`
+        SELECT * FROM products WHERE product_id = ?
+    `, [id]);
+    return product;
+}
+
+
+const editProduct = async (product_name, product_desc, product_price, prooduct_img, product_category, product_id) => {
+    const [product] = await pool.query(`
+        UPDATE products SET product_name = ?, product_desc = ?, product_price = ?, product_img = ?, product_category = ? WHERE product_id = ?
+    `, [product_name, product_desc, product_price, prooduct_img, product_category, product_id]);
+}
+
+
+const deleteProduct = async(id) => {
+    const [product] = await pool.query(`
+    DELETE FROM products WHERE product_id =?
+    `, [id]);
+}
+
+const addProduct = async () => {
+    const [product] = await pool.query(`
+    INSERT INTO products (product_name, product_desc, product_price, prooduct_img, product_category) VALUES (?, ?, ?, ?, ?)
+    `);
+}
+
+
+
+
+// Cart settings ===============
+const getCart = async () => {
+    const [cart] = await pool.query(`
+        SELECT * FROM cart
+    `)
+    return cart
+}
+
+const addToCart = async (product_id, user_id) => {
+    // Check if the product is already in the cart
+    const [existingProduct] = await pool.query(`
+        SELECT * FROM cart
+        WHERE product_id = ? AND user_id = ?
+    `, [product_id, user_id]);
+
+    if (existingProduct.length > 0) {
+
+        // Update the quantity of the existing product in the cart
+        const updatedQuantity = existingProduct[0].quantity + 1;
+
+        await pool.query(`
+            UPDATE cart
+            SET quantity = ?
+            WHERE product_id = ? AND user_id = ?
+        `, [updatedQuantity, product_id, user_id]);
+
+    } else {
+
+        // Insert the product into the cart
+        await pool.query(`
+            INSERT INTO cart (product_id, user_id, quantity)
+            VALUES (?, ?, 1)
+        `, [product_id, user_id]);
+
+    }
+}
+
+const insert = async(product_id, user_id) => {
+    // Call the addToCart function to add the product to the cart
+    await addToCart(product_id, user_id);
+}
+
+const removeFromCart = async (product_id) => {
+    const [inCart] = await pool.query(`
+    DELETE FROM cart WHERE product_id = ? 
+    `, [product_id]);
+}
+
+
+
+// user verification ============
+
+const checkUser = async (user_email) => {
+    const [[{user_password}]] = await pool.query(`
+        SELECT user_password FROM users WHERE user_email = ?
+    `, [user_email])
+    return user_password
+}
+
+// user settings
+
+const getUsers = async () => {
+ const [users] = await pool.query(`
+    SELECT * FROM users
+ `);
+ return users;
+}
+
+const addUser = async (user_profile, user_email, user_password, user_role, user_image) => {
+    const [user] = await pool.query(`
+       INSERT INTO users (user_profile, user_email, user_password, user_role, user_image) 
+       VALUES(?, ?, ?, ?, ?)
+    `,[user_profile, user_email, user_password, user_role, user_image])
+    return getUsers(user.insertId)
+}
+
+const getUserByID =  async (user_id) => {
+    const [user] = await pool.query(`
+        SELECT * FROM users WHERE user_id = ?
+    `,[user_id]);
+    return user
+}
+
+   
+const deleteUser = async (user_id) => {
+    const [users] = await pool.query(`
+        DELETE FROM users WHERE user_id = ?
+    `,[user_id])
+}
+
+// admin check
+const checkRoleStatus = async (user) => {
+ const [[{user_role}]] = await pool.query(`
+    SELECT * FROM users WHERE user_role = ?
+ ` , [user]);
+    return user_role;
+}
+
+ 
+export {getProducts, getProductByID, editProduct, deleteProduct, addProduct, getCart, insert, addToCart, removeFromCart, checkUser, getUsers, addUser, deleteUser, getUserByID, checkRoleStatus}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// const addToCart = async (product_id) => {
+//     const [addToCart] = await pool.query(`
+//         SELECT * FROM products
+//         INNER JOIN cart ON products.product_id = cart.product_id
+//         WHERE cart.user_id = ?
+//     `, [product_id]);
+//     return addToCart
+// }
+// // console.log(await addToCart(1))
+
+// const insert = async(product_id, user_id, quantity) => {
+//     const [result] = await pool.query(`
+//       INSERT INTO cart (product_id, user_id, quantity) VALUES (?,?,?)
+//     `,[product_id, user_id, quantity])
+//     return addToCart()
+// }
