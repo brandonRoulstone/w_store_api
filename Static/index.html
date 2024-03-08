@@ -6,17 +6,111 @@
     <title>W-store</title>
 </head>
 <body>
+
+    <div class="container">
+        <h1>W-store Api</h1>
+    </div>
+
+  
+        <div class="dividerOne"></div>
+
+
     <table>
         <tr>
-            <td style="border: 1px solid black;">Functionality</td>
-            <td style="border: 1px solid black;">Url link</td>
-            <td style="border: 1px solid black;">Method</td>
+            <td>Functionality :</td>
+            <td>Url link</td>
+            <td>Method</td>
         </tr>
         <tr>
-            <td style="border: 1px solid black;">AddToCart :</td>
-            <td style="border: 1px solid black;">http://localhost:3310/cart/:product_id<b>?user_id=3</b></td>
-            <td style="border: 1px solid black;">post/id?user_id=?</td>
+            <td>AddToCart :</td>
+            <td>http://localhost:3310/cart/:product_id<b>?user_id=3</b></td>
+            <td>post/id?user_id=?</td>
+        </tr>
+        <tr>
+            <td>delFromCart :</td>
+            <td>http://localhost:3310/cart/:id</td>
+            <td>Delete</td>
+        </tr>
+        <tr>
+            <td>Login :</td>
+            <td>http://localhost:3310/login</td>
+            <td>Post</td>
+        </tr>
+        <tr>
+            <td>Logout :</td>
+            <td>http://localhost:3310/logout</td>
+            <td>delete</td>
+        </tr>
+        <tr>
+            <td>singleProduct :</td>
+            <td>http://localhost:3310/products/:id</td>
+            <td>Get</td>
+        </tr>
+        <tr>
+            <td>getAllProducts :</td>
+            <td>http://localhost:3310/products</td>
+            <td>Get</td>
+        </tr>
+        <tr>
+            <td>deleteProduct :</td>
+            <td>http://localhost:3310/products/:id</td>
+            <td>Delete</td>
+        </tr>
+        <tr>
+            <td>editProduct :</td>
+            <td>http://localhost:3310/products/:id</td>
+            <td>Patch</td>
+        </tr>
+        <tr>
+            <td>getAllUsers :</td>
+            <td>http://localhost:3310/users</td>
+            <td>Get</td>
+        </tr>
+        <tr>
+            <td>getUser :</td>
+            <td>http://localhost:3310/users/:id</td>
+            <td>Get</td>
+        </tr>
+        <tr>
+            <td>editUser :</td>
+            <td>http://localhost:3310/users/:id</td>
+            <td>Patch</td>
+        </tr>
+        <tr>
+            <td>addUser :</td>
+            <td>http://localhost:3310/users</td>
+            <td>Post</td>
+        </tr>
+        <tr>
+            <td>deleteUser :</td>
+            <td>http://localhost:3310/users/:id</td>
+            <td>Delete</td>
         </tr>
     </table>
+
+    <style>
+        body{
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .container{
+            display: flex;
+            justify-content: center;
+        }
+        .dividerOne{
+            height: 5px;
+            width: 30%;
+            background: linear-gradient(to left,rgb(0, 255, 238) 50%, green 50%);
+            display: flex;
+            justify-content: center;
+            margin-bottom: 10px;
+        }
+        td {
+            border: 1px solid black;
+        }
+    </style>
 </body>
 </html>

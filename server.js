@@ -31,7 +31,13 @@ app.post('/login', authenticate, (req, res) => {
     res.json({
         msg: 'Welcome back to the store'
     });
-})
+});
+app.delete('/logout', (req, res) => {
+    res.clearCookie('jwt')
+    res.json({
+        msg : 'logged out succesfuly'
+    });
+});
 app.use('/products', productsRoute);
 app.use('/cart',verifyJwt, cartRoute);
 app.use('/users',verifyJwt, userRoute);
@@ -39,6 +45,16 @@ app.use('/users',verifyJwt, userRoute);
 app.listen(PORT, console.log(`server running on http://localhost:${PORT}`));
 
 
+
+// loging in with this user for testing purposes
+
+// {
+//     "user_profile": "JohnDoe",
+//     "user_email": "JD1@gmail.com",
+//     "user_password": "john",
+//     "user_role": "admin",
+//     "user_image": "nothing"
+// }
  
 
 {/* <blockquote class="imgur-embed-pub" lang="en" data-id="a/PlyvO0z" data-context="false" ><a href="//imgur.com/a/PlyvO0z"></a></blockquote><script async src="//s.imgur.com/min/embed.js" charset="utf-8"></script> */}
