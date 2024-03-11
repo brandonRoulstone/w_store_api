@@ -17,7 +17,7 @@ const PORT = process.env.MYSQL_ADDON_PORT || 6896;
 app.use(express.static('./Static'));
 
 app.use(cors({
-    origin: 'http://localhost:3310',
+    origin: 'http://localhost:8080',
     credentials: true
 }));
 
