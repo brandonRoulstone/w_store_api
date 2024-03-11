@@ -7,7 +7,7 @@ const router = express.Router();
 
 router.route('/') 
     .get(isRoleEquiqToAdmin,controller.getAllUSers)
-    .post(isRoleEquiqToAdmin,onHashBefore,controller.addNewUser)
+    .post(onHashBefore,controller.addNewUser)
 
 
 router.route('/:id')
