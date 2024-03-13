@@ -21,9 +21,13 @@ const authenticate = async (req, res, next) => {
 
             const token = jwt.sign({user_email:user_email}, process.env.SECRET_KEY, {expiresIn: '1d'});
 
-            res.cookie('jwt', token, {httpOnly: true, secure: true, sameSite: 'None'});
+            res.cookie('jwt', token, {httpOnly: false, expiresIn: '1d'});
             
-            console.log(token)
+            // console.log(token)
+            res.send({
+                token: token,
+                msg: 'you logged in'
+            })
 
             next(); 
 

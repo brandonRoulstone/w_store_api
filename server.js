@@ -24,9 +24,6 @@ app.use(express.json());
 app.use(cookieParser());
 
 app.post('/login', authenticate, (req, res) => { 
-    res.json({
-        msg: 'Welcome back to the store'
-    });
 });
 
 app.use('/register', registerRoute);
