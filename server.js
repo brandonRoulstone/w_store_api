@@ -46,7 +46,7 @@ app.listen(PORT, console.log(`server running on http://localhost:${PORT}`));
 
 
 
-// loging in with this user for testing purposes
+
 
 // {
 //     "user_profile": "JohnDoe",
