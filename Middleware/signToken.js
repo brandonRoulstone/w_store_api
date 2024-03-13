@@ -21,7 +21,9 @@ const authenticate = async (req, res, next) => {
 
             const token = jwt.sign({user_email:user_email}, process.env.SECRET_KEY, {expiresIn: '1d'});
 
-            res.cookie('jwt', token, {httpOnly: true});
+            res.cookie('jwt', token
+            //  {httpOnly: true}
+             );
             
             console.log(token)
 
