@@ -6,7 +6,7 @@ import isRoleEquiqToAdmin from '../Middleware/roleStatus.js';
 const router = express.Router();
 
 router.route('/') 
-    .get(isRoleEquiqToAdmin,controller.getAllUSers)
+    .get(controller.getAllUSers)
     .post(isRoleEquiqToAdmin,onHashBefore,controller.addNewUser)
 
 
