@@ -3,19 +3,19 @@ config();
 import jwt from 'jsonwebtoken'
  
 const auth = async (req, res, next) => {  
-
     let {cookie} = req.headers;
-
+    
     // setting the refresh token in an object
     const refreshTokens = {}
-     
+    
     // checks if theres a cookie and then splits it
     let tokenInHeader = cookie && cookie.split('=')[1];
-
+    console.log(tokenInHeader)
+    
     if (tokenInHeader === undefined) {
-
+        
         res.status(401).send({msg:"No valid token"});   
-
+        
     } else{
 
         console.log(tokenInHeader);
