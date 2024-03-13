@@ -8,8 +8,7 @@ import cartRoute from './Routes/cartRoute.js';
 import verifyJwt from './Middleware/verifyJwt.js'
 import userRoute from './Routes/userRoute.js';
 import authenticate from './Middleware/signToken.js';
-// import auth from './Middleware/verifyJwt.js';
-import { checkRoleStatus } from './Model/db.js';
+import registerRoute from './Routes/registerRoute.js';
 
 const app = express();
 const PORT = process.env.MYSQL_ADDON_PORT || 6896;
@@ -23,21 +22,22 @@ app.use(cors({
 
 app.use(express.json());
 app.use(cookieParser());
-// app.use(auth)
-// app.use(verifyJwt)
-
 
 app.post('/login', authenticate, (req, res) => { 
     res.json({
         msg: 'Welcome back to the store'
     });
 });
+
+app.use('/register', registerRoute);
+
 app.delete('/logout', (req, res) => {
     res.clearCookie('jwt')
     res.json({
         msg : 'logged out succesfuly'
     });
 });
+
 app.use('/products', productsRoute);
 app.use('/cart',verifyJwt, cartRoute);
 app.use('/users',verifyJwt, userRoute);
