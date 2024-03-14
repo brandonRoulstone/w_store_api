@@ -14,9 +14,9 @@
       
       <textRenderVue data-compTxt RenderContent="Welcome to W Store, your ultimate destination for premium gaming PCs and consoles. Elevate your gaming experience with top-quality hardware and unrivaled performance. Shop now and level up your game!"/>
 
-      <router-link to="/products">
+      <router-link to="/login">
 
-        <ButtonCompVue btnContent="Shop now!" data-animate/>
+        <ButtonCompVue btnContent="login!" data-animate/>
         
       </router-link>
 

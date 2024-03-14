@@ -1,6 +1,6 @@
 <template lang="">
     <div v-for="product of $store.state.product">
-        <img :src="product.product_img" alt="" />
+        <img :src="product.product_img" :alt="product.product_name" />
         {{ product.product_name }}
     </div>
 </template>

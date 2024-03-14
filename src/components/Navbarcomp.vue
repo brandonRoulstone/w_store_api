@@ -13,12 +13,15 @@
                     <router-link class="nav-link" to="/">Home</router-link>
                     <router-link class="nav-link" to="/about">About</router-link> 
                     <router-link class="nav-link" to="/products">products</router-link> 
-                    <router-link class="nav-link" to="/admin">Admin</router-link> 
-                    <router-link class="nav-link" to="/profile">profile</router-link>
+                    <router-link class="nav-link" to="/admin" v-if="$cookies.get('jwt')">Admin</router-link> 
+                    <router-link class="nav-link" to="/profile" v-if="$cookies.get('jwt')">profile</router-link>
                     <router-link class="nav-link" to="/login">login</router-link>
-                    <router-link class="nav-link" id="cartXYZ" to="/cart"><i class="fa-solid fa-cart-shopping fa-lg" style="color: #0497c9;"></i> <span>{{count}}</span></router-link>
+                    <router-link class="nav-link" id="cartXYZ" to="/cart" v-if="$cookies.get('jwt')"><i class="fa-solid fa-cart-shopping fa-lg" style="color: #0497c9;"></i> <span>{{count}}</span></router-link>
+                  </div>
                 </div>
-            </div>
+                <div>
+                  <button v-if="$cookies.get('jwt')" @click="logOut()" id="btn"><i class="fa-solid fa-arrow-right-from-bracket fa-sm" style="color: #ffffff;"></i></button>
+                </div>
             </div>
           </nav>
 </template>
@@ -28,13 +31,16 @@ export default {
 
   data(){
     return {
-      count : 0
+      count : 0,
     }
   },
 
   methods : {
     watchCart(){
       
+    },
+    logOut(){
+      this.$store.dispatch('logoutUser')
     }
   }
     
@@ -50,36 +56,43 @@ export default {
     top: 0;
 }
 
+#btn{
+  background: black;
+  border: none;
+  border-radius: 50%;
+  height: 27px;
+  width: 27px;
+}
+
 nav {
     padding: 20px;
   }
   
-  nav a {
-    font-weight: bold;
-    color: #0497c9;
-  }
+nav a {
+  font-weight: bold;
+  color: #0497c9;
+}
   
-  nav a.router-link-exact-active {
-    color: #00bfff;
-  }
-  #cartXYZ span{
-    position: absolute;
-    top: 15%;
-    background: red;
-    color: white;
-    border-radius: 50%;
-    height: 25px;
-    width: 25px;
-    font-size: 13px;
-    padding: 3px;
-  }
+nav a.router-link-exact-active {
+  color: #00bfff;
+}
+#cartXYZ span{
+  background: red;
+  color: white;
+  border-radius: 50%;
+  height: 25px;
+  width: 25px;
+  font-size: 13px;
+  padding: 3px;
+  transform: scale(50%);
+}
 
 
-  @media (max-width: 995px) {
-    #navbar{
-        height: auto;
-        background: white;
-    }
+@media (max-width: 995px) {
+  #navbar{
+      height: auto;
+      background: rgb(255, 255, 255);
   }
+}
     
 </style>

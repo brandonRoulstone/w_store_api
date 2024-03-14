@@ -21,6 +21,6 @@ export default {
   text-align: center;
 }
 ::-webkit-scrollbar{
-  display: none;
+  width: 0px !important;
 }
 </style>
