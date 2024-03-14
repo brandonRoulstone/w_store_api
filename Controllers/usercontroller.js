@@ -34,7 +34,7 @@ export default {
 
         user_image ? user_role : { user_role } = user
 
-        await addUser(user_profile, user_email, user_password, user_role, user_image, +req.params.id);
+        await editUser(user_profile, user_email, user_password, user_role, user_image, +req.params.id);
 
         res.send(await getUsers())
 
