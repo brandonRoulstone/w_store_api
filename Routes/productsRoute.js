@@ -7,13 +7,13 @@ const router = express.Router();
 
 router.route('/')
     .get(controller.allProducts)
-    .post(isRoleEquiqToAdmin,controller.addProductToDB)
+    .post(controller.addProductToDB)
 
 
 router.route('/:id')
     .get(controller.prodByID)
-    .delete(isRoleEquiqToAdmin,controller.delProductByID)
-    .patch(isRoleEquiqToAdmin,controller.editProductByID)
+    .delete(controller.delProductByID)
+    .patch(controller.editProductByID)
 
 
 export default router 

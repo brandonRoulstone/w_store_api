@@ -7,12 +7,12 @@ const router = express.Router();
 
 router.route('/') 
     .get(controller.getAllUSers)
-    .post(isRoleEquiqToAdmin,onHashBefore,controller.addNewUser)
+    .post(onHashBefore,controller.addNewUser)
 
 
 router.route('/:id')
-    .get(isRoleEquiqToAdmin,controller.getUser)
-    .delete(isRoleEquiqToAdmin, controller.deleteUserByID)
+    .get(controller.getUser)
+    .delete(controller.deleteUserByID)
 
 
 export default router
