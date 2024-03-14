@@ -122,6 +122,13 @@ const getUserByID =  async (user_id) => {
     return user
 }
 
+
+const editUser = async (user_profile, user_email, user_password, user_role, user_image, user_id) =>{
+    const [users] = await pool.query(`
+    UPDATE users SET user_profile = ?, user_email = ?, user_password = ?, user_role = ?, user_image = ? WHERE user_id = ?
+    `, [user_profile, user_email, user_password, user_role, user_image, user_id])
+}
+
    
 const deleteUser = async (user_id) => {
     const [users] = await pool.query(`
@@ -138,7 +145,7 @@ const checkRoleStatus = async (user) => {
 }
   
  
-export {getProducts, getProductByID, editProduct, deleteProduct, addProduct, getCart, insert, addToCart, removeFromCart, checkUser, getUsers, addUser, deleteUser, getUserByID, checkRoleStatus}
+export {getProducts, getProductByID, editProduct, deleteProduct, addProduct, getCart, insert, addToCart, removeFromCart, checkUser, getUsers, addUser, deleteUser, getUserByID, checkRoleStatus, editUser}
 
 
 

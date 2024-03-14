@@ -1,4 +1,4 @@
-import { getUsers, getUserByID, addUser, deleteUser } from '../Model/db.js'
+import { getUsers, getUserByID, addUser, deleteUser, editUser } from '../Model/db.js'
 
 export default {
     getAllUSers : async (req, res) => {
@@ -33,6 +33,10 @@ export default {
         user_role ? user_role : { user_role } = user
 
         user_image ? user_role : { user_role } = user
+
+        await addUser(user_profile, user_email, user_password, user_role, user_image, +req.params.id);
+
+        res.send(await getUsers())
 
     }
 }
