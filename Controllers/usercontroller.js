@@ -2,7 +2,7 @@ import { getUsers, getUserByID, addUser, deleteUser, editUser } from '../Model/d
 
 export default {
     getAllUSers : async (req, res) => {
-        res.send(await getUsers());
+        res.send(await getUsers(req.body.user_profile));
     },
     getUser : async (req, res) => {
         res.send(await getUserByID(+req.params.id))
