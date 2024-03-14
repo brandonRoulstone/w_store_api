@@ -22,7 +22,7 @@ export default {
         
         let { user_profile, user_email, user_password, user_role, user_image } = req.body;
 
-        const user = await getUserByID(+req.params.id)
+        const [user] = await getUserByID(+req.params.id)
 
         user_profile ? user_profile : { user_profile } = user
 
