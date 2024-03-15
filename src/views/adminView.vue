@@ -1,71 +1,62 @@
 <template>
 
-  <div class="pt-5 mt-5">
+<div class="p-5 mt-5">
     
-    <h1>Manage products in store</h1>
+  <h1>Manage products in store</h1>
 
-    <div id="products" class="gap-4">
-
-        <div v-for="product in $store.state.products" v-bind:key="product.product_id">
-
-            <div class="card" style="width: 18rem;">
-
-                <img :src="product.product_img" class="card-img-top" :alt="product.product_name" loading="lazy" id="productImg">
-
-                <div class="card-body">
-
-                  <h5 class="card-title">{{product.product_name}}</h5>
-
-                  <p class="card-text">R{{product.product_price}}</p>
-
-                  <p class="card-text" id="textOve">{{product.product_desc}}</p>
-
-                  <button href="#" class="btn btn-danger mx-1"><i class="fa-solid fa-trash fa-lg" style="color: #ffffff;"></i></button>
-
-                  <button type="button" class="btn btn-primary" data-bs-toggle="modal" :data-bs-target="'#staticBackdrop' + product.product_id">
-                    update
-                  </button>
-                  
-                  <div class="modal fade" :id="'staticBackdrop' + product.product_id" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                      <div class="modal-content">
-                        <div class="modal-header">
-                          <h1 class="modal-title fs-5" id="staticBackdropLabel">Update product {{product.product_id}}</h1>
-                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <div class="input-group flex-nowrap mb-2">
-                                <span class="input-group-text" id="addon-wrapping">Username</span>
-                                <input type="text" class="form-control" placeholder="Product name" aria-label="Username" aria-describedby="addon-wrapping" v-model="product_name">
-                            </div>
-                            <div class="input-group flex-nowrap mb-2">
-                                <span class="input-group-text" id="addon-wrapping">Product description</span>
-                                <input type="text" class="form-control" placeholder="Product description" aria-label="Username" aria-describedby="addon-wrapping" v-model="product_desc">
-                            </div>
-                            <div class="input-group flex-nowrap mb-2">
-                                <span class="input-group-text" id="addon-wrapping">Product price</span>
-                                <input type="text" class="form-control" placeholder="Product price (R)" aria-label="Username" aria-describedby="addon-wrapping" v-model="product_price">
-                            </div>
-                            <div class="input-group flex-nowrap mb-2">
-                                <span class="input-group-text" id="addon-wrapping">Product category</span>
-                                <input type="text" class="form-control" placeholder="Product category" aria-label="Username" aria-describedby="addon-wrapping" v-model="product_category">
-                            </div>
-                            <div class="input-group flex-nowrap mb-2">
-                                <span class="input-group-text" id="addon-wrapping">Product image</span>
-                                <input type="text" class="form-control" placeholder="Product image" aria-label="Username" aria-describedby="addon-wrapping" v-model="product_img">
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                          <button type="button" class="btn btn-primary" @click="updateProduct(product.product_id)">Save changes</button>
-                        </div>
-                      </div>
-                    </div>
+  <div id="products" class="gap-4">
+    <div v-for="product in $store.state.products" v-bind:key="product.product_id">
+      <div class="card" style="width: 18rem;">
+        <img :src="product.product_img" class="card-img-top" :alt="product.product_name" loading="lazy" id="productImg">
+        <div class="card-body">
+          <h5 class="card-title">{{product.product_name}}</h5>
+          <p class="card-text">R{{product.product_price}}</p>
+          <p class="card-text" id="textOve">{{product.product_desc}}</p>
+          <button href="#" class="btn btn-danger mx-1"><i class="fa-solid fa-trash fa-lg" style="color: #ffffff;"></i></button>
+          <button type="button" class="btn btn-primary" data-bs-toggle="modal" :data-bs-target="'#staticBackdrop' + product.product_id">
+            update
+          </button>
+                
+          <div class="modal fade" :id="'staticBackdrop' + product.product_id" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h1 class="modal-title fs-5" id="staticBackdropLabel">Update product {{product.product_id}}</h1>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <div class="input-group flex-nowrap mb-2">
+                    <span class="input-group-text" id="addon-wrapping">Username</span>
+                    <input type="text" class="form-control" placeholder="Product name" aria-label="Username" aria-describedby="addon-wrapping" v-model="product_name">
                   </div>
+                  <div class="input-group flex-nowrap mb-2">
+                    <span class="input-group-text" id="addon-wrapping">Product description</span>
+                    <input type="text" class="form-control" placeholder="Product description" aria-label="Username" aria-describedby="addon-wrapping" v-model="product_desc">
+                  </div>
+                  <div class="input-group flex-nowrap mb-2">
+                    <span class="input-group-text" id="addon-wrapping">Product price</span>
+                    <input type="text" class="form-control" placeholder="Product price (R)" aria-label="Username" aria-describedby="addon-wrapping" v-model="product_price">
+                  </div>
+                  <div class="input-group flex-nowrap mb-2">
+                    <span class="input-group-text" id="addon-wrapping">Product category</span>
+                    <input type="text" class="form-control" placeholder="Product category" aria-label="Username" aria-describedby="addon-wrapping" v-model="product_category">
+                  </div>
+                  <div class="input-group flex-nowrap mb-2">
+                    <span class="input-group-text" id="addon-wrapping">Product image</span>
+                    <input type="text" class="form-control" placeholder="Product image" aria-label="Username" aria-describedby="addon-wrapping" v-model="product_img">
                 </div>
               </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" @click="updateProduct(product.product_id)">Save changes</button>
+              </div>
+            </div>
+          </div>
         </div>
+      </div>
     </div>
+  </div>
+</div>
 
 
 
@@ -74,100 +65,137 @@
     <div class="mx-4" v-for="user in $store.state.users" v-bind:key="user">
 
       <div class="" id="card" style="width: 18rem;">
-           <img :src="user.user_image" class="card-img-top" :alt="user.user_profile" id="userImg">
-           <div class="card-body">
+        <img :src="user.user_image" class="card-img-top" :alt="user.user_profile" id="userImg">
+        <div class="card-body">
 
-             <h5 class="card-title">{{ user.user_profile }}</h5>
+          <h5 class="card-title">{{ user.user_profile }}</h5>
 
-             <p class="card-text">{{ user.user_email }}</p>
-             <p class="card-text">{{ user.user_role }}</p>
-             <!-- <p class="card-text">{{ user.user_password }}</p> -->
-             <div class="d-flex justify-content-evenly">
-                <button type="button" class="btn btn-primary mx-1" data-bs-toggle="modal" :data-bs-target="'#exampleModal' + user.user_id">
-                    update
-                  </button>
+          <p class="card-text">{{ user.user_email }}</p>
+          <p class="card-text">{{ user.user_role }}</p>
+          <!-- <p class="card-text">{{ user.user_password }}</p> -->
+          <div class="d-flex justify-content-evenly">
+            <button type="button" class="btn btn-primary mx-1" data-bs-toggle="modal" :data-bs-target="'#exampleModal' + user.user_id">
+              update
+            </button>
                   
-                  <!-- Modal -->
-                  <div class="modal fade" :id="'exampleModal'+user.user_id" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                      <div class="modal-content">
-                        <div class="modal-header">
-                          <h1 class="modal-title fs-5" id="exampleModalLabel">{{user.user_id}}</h1>
-                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <div class="input-group flex-nowrap mb-2">
-                                <span class="input-group-text" id="addon-wrapping">Username</span>
-                                <input type="text" class="form-control" placeholder="user_name" aria-label="Username" aria-describedby="addon-wrapping" v-model="user_profile">
-                            </div>
-                            <div class="input-group flex-nowrap mb-2">
-                                <span class="input-group-text" id="addon-wrapping">Email</span>
-                                <input type="text" class="form-control" placeholder="user_email" aria-label="Username" aria-describedby="addon-wrapping" v-model="user_email">
-                            </div>
-                            <div class="input-group flex-nowrap mb-2">
-                                <span class="input-group-text" id="addon-wrapping">Role</span>
-                                <input type="text" class="form-control" placeholder="user_role" aria-label="Username" aria-describedby="addon-wrapping" v-model="user_role">
-                            </div>
-                            <div class="input-group flex-nowrap mb-2">
-                                <span class="input-group-text bg-warning" id="addon-wrapping">User password</span>
-                                <input type="text" class="form-control" placeholder="Cannot see or update user password!" aria-label="Username" aria-describedby="addon-wrapping" v-model="user_password" readonly>
-                            </div>
-                            <div class="input-group flex-nowrap mb-2">
-                                <span class="input-group-text" id="addon-wrapping">Profile image</span>
-                                <input type="text" class="form-control" placeholder="user_image" aria-label="Username" aria-describedby="addon-wrapping" v-model="user_image">
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                          <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> -->
-                          <button type="button" class="btn btn-primary" @click="updateUser(user.user_id)">Save changes to {{user.user_profile}}</button>
-                        </div>
-                      </div>
+            <!-- Modal -->
+            <div class="modal fade" :id="'exampleModal'+user.user_id" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">{{user.user_id}}</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    <div class="input-group flex-nowrap mb-2">
+                      <span class="input-group-text" id="addon-wrapping">Username</span>
+                      <input type="text" class="form-control" placeholder="user_name" aria-label="Username" aria-describedby="addon-wrapping" v-model="user_profile">
+                    </div>
+                    <div class="input-group flex-nowrap mb-2">
+                      <span class="input-group-text" id="addon-wrapping">Email</span>
+                      <input type="text" class="form-control" placeholder="user_email" aria-label="Username" aria-describedby="addon-wrapping" v-model="user_email">
+                    </div>
+                    <div class="input-group flex-nowrap mb-2">
+                      <span class="input-group-text" id="addon-wrapping">Role</span>
+                      <input type="text" class="form-control" placeholder="user_role" aria-label="Username" aria-describedby="addon-wrapping" v-model="user_role">
+                    </div>
+                    <div class="input-group flex-nowrap mb-2">
+                      <span class="input-group-text bg-warning" id="addon-wrapping">User password</span>
+                      <input type="text" class="form-control" placeholder="Cannot see or update user password!" aria-label="Username" aria-describedby="addon-wrapping" v-model="user_password" readonly>
+                    </div>
+                    <div class="input-group flex-nowrap mb-2">
+                      <span class="input-group-text" id="addon-wrapping">Profile image</span>
+                      <input type="text" class="form-control" placeholder="user_image" aria-label="Username" aria-describedby="addon-wrapping" v-model="user_image">
                     </div>
                   </div>
-                <button class="btn btn-danger" @click="deleteUser(user.user_id)"><i class="fa-solid fa-trash fa-lg" style="color: #ffffff;"></i></button>
-             </div>
-           </div>
-         </div>
-    </div>
-    
+                  <div class="modal-footer">
+                    <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> -->
+                    <button type="button" class="btn btn-primary" @click="updateUser(user.user_id)">Save changes to {{user.user_profile}}</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+             <button class="btn btn-danger" @click="deleteUser(user.user_id)"><i class="fa-solid fa-trash fa-lg" style="color: #ffffff;"></i></button>
+          </div>
+        </div>
+      </div>
+    </div>  
   </div>
-  <div>
-  <h1>Add a user!</h1>
-  <div id="boxXD">
-    <div class="input-group flex-nowrap mb-2">
+  <div class="container mt-3">
+    <h1>Add a user!</h1>
+    <div id="boxXD">
+      <div class="input-group flex-nowrap mb-2">
         <span class="input-group-text" id="addon-wrapping" v-if="user_profile.length === 0"><i class="fa-solid fa-user fa-xl" style="color: #ff0000;"></i></span>
         <span class="input-group-text" id="addon-wrapping" v-else><i class="fa-solid fa-user fa-xl" style="color: #11ff00;"></i></span>
-        <input type="text" class="form-control" placeholder="user_name" aria-label="Username" aria-describedby="addon-wrapping" v-model="user_profile" required>
+        <input type="text" class="form-control" placeholder="user_name" aria-label="user_name" aria-describedby="addon-wrapping" v-model="user_profile" required>
       </div>
       <div class="input-group flex-nowrap mb-2">
         <span class="input-group-text" id="addon-wrapping" v-if="user_email.length === 0"><i class="fa-solid fa-envelope fa-xl" style="color: #ff0000;"></i></span>
         <span class="input-group-text" id="addon-wrapping" v-else><i class="fa-solid fa-envelope-circle-check fa-xl" style="color: #11ff00;"></i></span>
-        <input type="text" class="form-control" placeholder="user_email" aria-label="Username" aria-describedby="addon-wrapping" v-model="user_email" required>
+        <input type="text" class="form-control" placeholder="user_email" aria-label="user_email" aria-describedby="addon-wrapping" v-model="user_email" required>
       </div>
       <div class="input-group flex-nowrap mb-2">
         <span class="input-group-text" id="addon-wrapping" v-if="user_role.length === 0"><i class="fa-solid fa-user-tie fa-xl" style="color: red;"></i></span>
         <span class="input-group-text" id="addon-wrapping" v-else><i class="fa-solid fa-user-tie fa-xl" style="color: #11ff00;"></i></span>
-        <input type="text" class="form-control" placeholder="user_role" aria-label="Username" aria-describedby="addon-wrapping" v-model="user_role" required>
+        <input type="text" class="form-control" placeholder="user_role" aria-label="user_role" aria-describedby="addon-wrapping" v-model="user_role" required>
       </div>
       <div class="input-group flex-nowrap mb-2">
-        <span class="input-group-text" id="addon-wrapping" v-if="user_password.length === 0"><i class="fa-solid fa-unlock fa-xl" style="color: #ff0000;"></i></span>
+        <span class="input-group-text" id="addon-wrapping" v-if="user_password.length === 0 || user_password.length < 5"><i class="fa-solid fa-unlock fa-xl" style="color: #ff0000;"></i></span>
         <span class="input-group-text" id="addon-wrapping" v-else><i class="fa-solid fa-lock fa-xl" style="color: #11ff00;"></i></span>
-        <input type="text" class="form-control" placeholder="set user pass" aria-label="Username" aria-describedby="addon-wrapping" v-model="user_password" required>
+        <input type="text" class="form-control" placeholder="set user password 5 characters or more" aria-label="user_password" aria-describedby="addon-wrapping" v-model="user_password" required>
       </div>
       <div class="input-group flex-nowrap mb-2">
         <span class="input-group-text" id="addon-wrapping" v-if="user_image.length === 0"><i class="fa-regular fa-image fa-xl" style="color: #ff0000;"></i></span>
         <span class="input-group-text" id="addon-wrapping" v-else><i class="fa-regular fa-image fa-xl" style="color: #11ff00;"></i></span>
-        <input type="text" class="form-control" placeholder="user_image" aria-label="Username" aria-describedby="addon-wrapping" v-model="user_image" required>
+        <input type="text" class="form-control" placeholder="user_image" aria-label="user_image" aria-describedby="addon-wrapping" v-model="user_image" required>
       </div>
-  </div>
-  <button @click="addNewUser()" class="btn btn-outline-primary">Add user</button>
-  </div>
-  </div>
+    </div>
+    <button class="btn btn-outline-dark" v-if="user_profile.length === 0 || user_email.length === 0 || user_role.length === 0 || user_password.length === 0 || user_password.length < 5 || user_image.length === 0" disabled>fill in all input fields</button>
+    <button @click="addNewUser()" class="btn btn-outline-primary" v-else>Add user to Database <i class="fa-solid fa-database fa-bounce fa-xl" style="color: blue;"></i></button>
+    <br>
+    <div id="errTxt"></div>
 
 
-  <div>
-    <ChartComp />
+    <div class="mt-3" id="boxXD">
+
+      <h1>Add a product</h1>
+
+      <div class="input-group flex-nowrap mb-2">
+        <span class="input-group-text" id="addon-wrapping" v-if="product_img.length === 0"><i class="fa-solid fa-image fa-xl" style="color: #ff0000;"></i></span>
+        <span class="input-group-text" id="addon-wrapping" v-else><i class="fa-regular fa-image fa-xl" style="color: #11ff00;"></i></span>
+        <input type="text" class="form-control" placeholder="product_image" aria-label="product_image" aria-describedby="addon-wrapping" v-model="product_img" required>
+      </div>
+      <div class="input-group flex-nowrap mb-2">
+        <span class="input-group-text" id="addon-wrapping" v-if="product_name.length === 0"><i class="fa-solid fa-tags fa-xl" style="color: #ff0000;"></i></span>
+        <span class="input-group-text" id="addon-wrapping" v-else><i class="fa-solid fa-tags fa-xl" style="color: #11ff00;"></i></span>
+        <input type="text" class="form-control" placeholder="product_name" aria-label="product_name" aria-describedby="addon-wrapping" v-model="product_name" required>
+      </div>
+      <div class="input-group flex-nowrap mb-2">
+        <span class="input-group-text" id="addon-wrapping" v-if="product_price.length === 0"><i class="fa-solid fa-dollar-sign fa-xl" style="color: #ff0000;"></i></span>
+        <span class="input-group-text" id="addon-wrapping" v-else><i class="fa-solid fa-dollar-sign fa-xl" style="color: #11ff00;"></i></span>
+        <input type="text" class="form-control" placeholder="product_price" aria-label="product_price" aria-describedby="addon-wrapping" v-model="product_price" required>
+      </div>
+      <div class="input-group flex-nowrap mb-2">
+        <span class="input-group-text" id="addon-wrapping" v-if="product_desc.length === 0"><i class="fa-solid fa-pencil fa-xl" style="color: #ff0000;"></i></span>
+        <span class="input-group-text" id="addon-wrapping" v-else><i class="fa-solid fa-pencil fa-xl" style="color: #11ff00;"></i></span>
+        <input type="text" class="form-control" placeholder="product_desc" aria-label="product_desc" aria-describedby="addon-wrapping" v-model="product_desc" required>
+      </div>
+      <div class="input-group flex-nowrap mb-2">
+        <span class="input-group-text" id="addon-wrapping" v-if="product_category.length === 0"><i class="fa-solid fa-list fa-xl" style="color: #ff0000;"></i></span>
+        <span class="input-group-text" id="addon-wrapping" v-else><i class="fa-solid fa-list fa-xl" style="color: #11ff00;"></i></span>
+        <input type="text" class="form-control" placeholder="product_category" aria-label="product_category" aria-describedby="addon-wrapping" v-model="product_category" required>
+      </div>
+      <button class="btn btn-outline-dark" v-if="product_img.length === 0 || product_name.length === 0 || product_price.length === 0 || product_desc.length === 0 || product_category.length === 0" disabled>fill in all input fields</button>
+      <button class="btn btn-outline-primary" v-else @click="addProduct()">Add product to Database <i class="fa-solid fa-database fa-bounce fa-xl" style="color: blue;"></i></button>
+      <div id="errOnInput"></div>
+    </div>
   </div>
+</div>
+
+
+<!-- <div>
+  <ChartComp />
+</div> -->
 
 </template>
 <script>
@@ -235,8 +263,28 @@ export default {
           this.$store.dispatch('fetchProducts')
         },
         addNewUser(){
-          this.$store.dispatch('addNewUser', this.$data)
+          const errTxt = document.getElementById("errTxt");
+          if(this.user_email.length === 0 || this.user_profile.length  === 0 || this.user_password.length  === 0 || this.user_image.length  === 0 || this.user_role.length  === 0){
+
+            errTxt.innerHTML += `<span style="color: red;">input is empty</span>`
+
+          } else {
+
+            this.$store.dispatch('addNewUser', this.$data)
+
+          }
         },
+        addProduct(){
+          if(this.product_name.length === 0 || this.product_desc.length === 0 || this.product_price.length === 0 || this.product_img.length === 0 || this.product_category.length === 0){
+
+            console.log('input pls')
+
+          }else {
+
+            this.$store.dispatch('addProduct', this.$data);
+
+          }
+        }
     },
     mounted(){
       this.getUsers();

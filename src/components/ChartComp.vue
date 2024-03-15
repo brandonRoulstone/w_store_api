@@ -11,17 +11,18 @@ let myChart = new Chart("myChart",
   type:"bar",
   data:{
     labels:["label","label2"],
-    datasets:[{
-          type:"bar",
-          backgroundColor:["blue","red"],
-          data:[4,3]
-        },
+    datasets:[
+      {
+        type:"bar",
+        backgroundColor:["blue","red"],
+        data:[4,3]
+      },
         //Second Bar (Optional)
-        {
-          type:"bar",
-          data:[2,1],
-          backgroundColor:["green","yellow"]
-        },
+      {
+        type:"bar",
+        data:[2,1],
+        backgroundColor:["green","yellow"]
+      },
     ]
       },
       options:{
