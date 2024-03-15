@@ -55,38 +55,25 @@
 export default {
 
     data(){
-        return {
-            user_id : null,
-            user_profile : null,
-            user_email : null,
-            user_password : null,
-            user_role : null,
-            user_image : null
-        }
+      return {
+        user_id : null,
+        user_profile : null,
+        user_email : null,
+        user_password : null,
+        user_role : null,
+        user_image : null
+      }
     },
     methods : {
-        signUser(){
-            // if(this.user_profile == 0 ||  this.user_email == 0 || this.user_password == 0 || this.user_role == null || this.user_image == null ){
-
-            //     document.getElementById("eertxt").innerHTML += `<p style="color: red; font-size: 10px;">Input please</p>`;
-
-            // } else {
-                console.log(this.$data.user_profile)
-                this.$store.dispatch('SignUser', this.$data)
-                window.location.reload()
-            // }
-        },
-        loginUser(){
-            // if(this.user_profile == 0 ||  this.user_email == 0 || this.user_password == 0 || this.user_role == null || this.user_image ){
-
-            //     document.getElementById("eertxt").innerHTML += `<p style="color: red; font-size: 10px;">Input please</p>`;
-
-            // } else {
-                console.log(this.$data.user_profile)
-                this.$store.dispatch('loginUser', this.$data)
-
-            // }
-        }
+      signUser(){
+        console.log(this.$data.user_profile)
+        this.$store.dispatch('SignUser', this.$data)
+        window.location.reload()
+      },
+      loginUser(){
+        // console.log(this.$data.user_profile)
+        this.$store.dispatch('loginUser', this.$data)
+      }
     }
     
 }

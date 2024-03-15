@@ -7,7 +7,8 @@ export default createStore({
   state: {
     products:[],
     product:[],
-    users: []
+    users: [],
+    loggedUser : []
   },
   getters: {
   },
@@ -19,6 +20,9 @@ export default createStore({
       state.product = payload
     },
     accessUsers(state, payload){
+      state.users = payload
+    },
+    accessUserIsLogged(state, payload){
       state.users = payload
     }
   },
@@ -44,7 +48,7 @@ export default createStore({
      async SignUser(context, userpayload){
       try {
         const res = await axios.post(`https://w-store-api.onrender.com/register`, userpayload)
-        alert(`Welcome ${res.data.user_profile}`)
+        alert(`Your account has been created ${res.data.user_profile}!`)
         window.location.reload()
       } catch (error) {
         console.error('error has occurred')
@@ -55,13 +59,19 @@ export default createStore({
 
         const res = await axios.post(`https://w-store-api.onrender.com/login`, userInfoIsValid)
 
+        context.commit('accessUserIsLogged', res.data)
+
+        console.log(res.data.user_email);
+
         $cookies.set('jwt',res.data.token);
 
         alert(res.data.msg)
 
+        // data will be sent to the user profile view
+
         await router.push('/')
 
-        window.location.reload()
+        // window.location.reload()
 
       } catch (error) {
         console.error('error has occurred')
