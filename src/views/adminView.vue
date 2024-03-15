@@ -1,24 +1,31 @@
 <template>
 
+  <div class="pt-5 mt-5">
+    
     <h1>Manage products in store</h1>
+
     <div id="products" class="gap-4">
+
         <div v-for="product in $store.state.products" v-bind:key="product.product_id">
+
             <div class="card" style="width: 18rem;">
+
                 <img :src="product.product_img" class="card-img-top" :alt="product.product_name" loading="lazy" id="productImg">
+
                 <div class="card-body">
+
                   <h5 class="card-title">{{product.product_name}}</h5>
+
+                  <p class="card-text">R{{product.product_price}}</p>
+
                   <p class="card-text" id="textOve">{{product.product_desc}}</p>
+
                   <button href="#" class="btn btn-danger mx-1"><i class="fa-solid fa-trash fa-lg" style="color: #ffffff;"></i></button>
+
                   <button type="button" class="btn btn-primary" data-bs-toggle="modal" :data-bs-target="'#staticBackdrop' + product.product_id">
                     update
                   </button>
-<!-- 
-                  product_name : '',
-                  product_desc : '',
-                  product_price : '',
-                  product_category : '' -->
                   
-                  <!-- Modal -->
                   <div class="modal fade" :id="'staticBackdrop' + product.product_id" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                     <div class="modal-dialog">
                       <div class="modal-content">
@@ -62,80 +69,114 @@
 
 
 
-    <h1 class="mt-5 pt-5">Manage users</h1>
-    <div id="container">
+  <h1 class="mt-5 pt-5">Manage users</h1>
+  <div id="container">
+    <div class="mx-4" v-for="user in $store.state.users" v-bind:key="user">
 
-        <div class="mx-4" v-for="user in $store.state.users" v-bind:key="user">
-    
-           <div class="" id="card" style="width: 18rem;">
-               <img :src="user.user_image" class="card-img-top" :alt="user.user_profile" id="userImg">
-               <div class="card-body">
-    
-                 <h5 class="card-title">{{ user.user_profile }}</h5>
-    
-                 <p class="card-text">{{ user.user_email }}</p>
+      <div class="" id="card" style="width: 18rem;">
+           <img :src="user.user_image" class="card-img-top" :alt="user.user_profile" id="userImg">
+           <div class="card-body">
 
-                 <p class="card-text">{{ user.user_role }}</p>
+             <h5 class="card-title">{{ user.user_profile }}</h5>
 
-                 <!-- <p class="card-text">{{ user.user_password }}</p> -->
-
-                 <div class="d-flex justify-content-evenly">
-                    <button type="button" class="btn btn-primary mx-1" data-bs-toggle="modal" :data-bs-target="'#exampleModal' + user.user_id">
-                        update
-                      </button>
-                      
-                      <!-- Modal -->
-                      <div class="modal fade" :id="'exampleModal'+user.user_id" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog">
-                          <div class="modal-content">
-                            <div class="modal-header">
-                              <h1 class="modal-title fs-5" id="exampleModalLabel">{{user.user_id}}</h1>
-                              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+             <p class="card-text">{{ user.user_email }}</p>
+             <p class="card-text">{{ user.user_role }}</p>
+             <!-- <p class="card-text">{{ user.user_password }}</p> -->
+             <div class="d-flex justify-content-evenly">
+                <button type="button" class="btn btn-primary mx-1" data-bs-toggle="modal" :data-bs-target="'#exampleModal' + user.user_id">
+                    update
+                  </button>
+                  
+                  <!-- Modal -->
+                  <div class="modal fade" :id="'exampleModal'+user.user_id" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h1 class="modal-title fs-5" id="exampleModalLabel">{{user.user_id}}</h1>
+                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="input-group flex-nowrap mb-2">
+                                <span class="input-group-text" id="addon-wrapping">Username</span>
+                                <input type="text" class="form-control" placeholder="user_name" aria-label="Username" aria-describedby="addon-wrapping" v-model="user_profile">
                             </div>
-                            <div class="modal-body">
-                                <div class="input-group flex-nowrap mb-2">
-                                    <span class="input-group-text" id="addon-wrapping">Username</span>
-                                    <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="addon-wrapping" v-model="user_profile">
-                                </div>
-                                <div class="input-group flex-nowrap mb-2">
-                                    <span class="input-group-text" id="addon-wrapping">Email</span>
-                                    <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="addon-wrapping" v-model="user_email">
-                                </div>
-                                <div class="input-group flex-nowrap mb-2">
-                                    <span class="input-group-text" id="addon-wrapping">Role</span>
-                                    <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="addon-wrapping" v-model="user_role">
-                                </div>
-                                <div class="input-group flex-nowrap mb-2">
-                                    <span class="input-group-text bg-warning" id="addon-wrapping">User password</span>
-                                    <input type="text" class="form-control" placeholder="Cannot see or update user password!" aria-label="Username" aria-describedby="addon-wrapping" v-model="user_password" readonly>
-                                </div>
-                                <div class="input-group flex-nowrap mb-2">
-                                    <span class="input-group-text" id="addon-wrapping">Profile image</span>
-                                    <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="addon-wrapping" v-model="user_image" value="">
-                                </div>
+                            <div class="input-group flex-nowrap mb-2">
+                                <span class="input-group-text" id="addon-wrapping">Email</span>
+                                <input type="text" class="form-control" placeholder="user_email" aria-label="Username" aria-describedby="addon-wrapping" v-model="user_email">
                             </div>
-                            <div class="modal-footer">
-                              <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> -->
-                              <button type="button" class="btn btn-primary" @click="updateUser(user.user_id)">Save changes to {{user.user_profile}}</button>
+                            <div class="input-group flex-nowrap mb-2">
+                                <span class="input-group-text" id="addon-wrapping">Role</span>
+                                <input type="text" class="form-control" placeholder="user_role" aria-label="Username" aria-describedby="addon-wrapping" v-model="user_role">
                             </div>
-                          </div>
+                            <div class="input-group flex-nowrap mb-2">
+                                <span class="input-group-text bg-warning" id="addon-wrapping">User password</span>
+                                <input type="text" class="form-control" placeholder="Cannot see or update user password!" aria-label="Username" aria-describedby="addon-wrapping" v-model="user_password" readonly>
+                            </div>
+                            <div class="input-group flex-nowrap mb-2">
+                                <span class="input-group-text" id="addon-wrapping">Profile image</span>
+                                <input type="text" class="form-control" placeholder="user_image" aria-label="Username" aria-describedby="addon-wrapping" v-model="user_image">
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                          <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> -->
+                          <button type="button" class="btn btn-primary" @click="updateUser(user.user_id)">Save changes to {{user.user_profile}}</button>
                         </div>
                       </div>
-                    <button class="btn btn-danger" @click="deleteUser(user.user_id)"><i class="fa-solid fa-trash fa-lg" style="color: #ffffff;"></i></button>
-                 </div>
-               </div>
+                    </div>
+                  </div>
+                <button class="btn btn-danger" @click="deleteUser(user.user_id)"><i class="fa-solid fa-trash fa-lg" style="color: #ffffff;"></i></button>
              </div>
-        </div>
-
-        
+           </div>
+         </div>
     </div>
+    
+  </div>
+  <div>
+  <h1>Add a user!</h1>
+  <div id="boxXD">
+    <div class="input-group flex-nowrap mb-2">
+        <span class="input-group-text" id="addon-wrapping" v-if="user_profile.length === 0"><i class="fa-solid fa-user fa-xl" style="color: #ff0000;"></i></span>
+        <span class="input-group-text" id="addon-wrapping" v-else><i class="fa-solid fa-user fa-xl" style="color: #11ff00;"></i></span>
+        <input type="text" class="form-control" placeholder="user_name" aria-label="Username" aria-describedby="addon-wrapping" v-model="user_profile" required>
+      </div>
+      <div class="input-group flex-nowrap mb-2">
+        <span class="input-group-text" id="addon-wrapping" v-if="user_email.length === 0"><i class="fa-solid fa-envelope fa-xl" style="color: #ff0000;"></i></span>
+        <span class="input-group-text" id="addon-wrapping" v-else><i class="fa-solid fa-envelope-circle-check fa-xl" style="color: #11ff00;"></i></span>
+        <input type="text" class="form-control" placeholder="user_email" aria-label="Username" aria-describedby="addon-wrapping" v-model="user_email" required>
+      </div>
+      <div class="input-group flex-nowrap mb-2">
+        <span class="input-group-text" id="addon-wrapping" v-if="user_role.length === 0"><i class="fa-solid fa-user-tie fa-xl" style="color: red;"></i></span>
+        <span class="input-group-text" id="addon-wrapping" v-else><i class="fa-solid fa-user-tie fa-xl" style="color: #11ff00;"></i></span>
+        <input type="text" class="form-control" placeholder="user_role" aria-label="Username" aria-describedby="addon-wrapping" v-model="user_role" required>
+      </div>
+      <div class="input-group flex-nowrap mb-2">
+        <span class="input-group-text" id="addon-wrapping" v-if="user_password.length === 0"><i class="fa-solid fa-unlock fa-xl" style="color: #ff0000;"></i></span>
+        <span class="input-group-text" id="addon-wrapping" v-else><i class="fa-solid fa-lock fa-xl" style="color: #11ff00;"></i></span>
+        <input type="text" class="form-control" placeholder="set user pass" aria-label="Username" aria-describedby="addon-wrapping" v-model="user_password" required>
+      </div>
+      <div class="input-group flex-nowrap mb-2">
+        <span class="input-group-text" id="addon-wrapping" v-if="user_image.length === 0"><i class="fa-regular fa-image fa-xl" style="color: #ff0000;"></i></span>
+        <span class="input-group-text" id="addon-wrapping" v-else><i class="fa-regular fa-image fa-xl" style="color: #11ff00;"></i></span>
+        <input type="text" class="form-control" placeholder="user_image" aria-label="Username" aria-describedby="addon-wrapping" v-model="user_image" required>
+      </div>
+  </div>
+  <button @click="addNewUser()" class="btn btn-outline-primary">Add user</button>
+  </div>
+  </div>
+
+
+  <div>
+    <ChartComp />
+  </div>
 
 </template>
 <script>
+import ChartComp from '../components/ChartComp.vue'
 export default {
 
     data(){
         return{
+          // users
             user_id : null,
             user_profile : '',
             user_email : '',
@@ -153,18 +194,22 @@ export default {
         }
     },
 
+    components : {
+      ChartComp
+    },
+
     methods : {
         getUsers(){
             this.$store.dispatch('getUsers');
         },
         updateUser(user_id){
-            let userObjX ={
-                user_id : user_id,
-                user_profile : this.user_profile,
-                user_email : this.user_email,
-                user_password : this.user_password,
-                user_role : this.user_role,
-                user_image : this.user_image
+            let userObjX = {
+              user_id : user_id,
+              user_profile : this.user_profile,
+              user_email : this.user_email,
+              user_password : this.user_password,
+              user_role : this.user_role,
+              user_image : this.user_image
             }
             this.$store.dispatch('updateUser', userObjX);
 
@@ -172,27 +217,30 @@ export default {
         },
         updateProduct(product_id){
             let prodObjX = {
-                product_id : product_id,
-                product_name : this.product_name,
-                product_desc : this.product_desc,
-                product_price : this.product_price,
-                product_img : this.product_img,
-                product_category : this.product_category
+              product_id : product_id,
+              product_name : this.product_name,
+              product_desc : this.product_desc,
+              product_price : this.product_price,
+              product_img : this.product_img,
+              product_category : this.product_category
             }
             this.$store.dispatch('updateProducts', prodObjX)
 
         },
         deleteUser(user_id){
-            console.log(user_id);
-            this.$store.dispatch('deleteUser', user_id)
+          console.log(user_id);
+          this.$store.dispatch('deleteUser', user_id)
         },
         getProducts(){
-            this.$store.dispatch('fetchProducts')
-        }
+          this.$store.dispatch('fetchProducts')
+        },
+        addNewUser(){
+          this.$store.dispatch('addNewUser', this.$data)
+        },
     },
     mounted(){
-        this.getUsers();
-        this.getProducts();
+      this.getUsers();
+      this.getProducts();
     }
     
 }
@@ -255,25 +303,6 @@ export default {
     overflow-x: scroll;
 }
 
-table { 
-    width: 100%; 
-    border-collapse: collapse; 
-  }
-  /* Zebra striping */
-  tr:nth-of-type(odd) { 
-    background: #eee; 
-  }
-  th { 
-    background: #333; 
-    color: white; 
-    font-weight: bold; 
-  }
-  td, th { 
-    padding: 6px; 
-    border: 1px solid #ccc; 
-    text-align: left; 
-  }
-
   #card{
     display: flex !important;
   }
@@ -290,54 +319,8 @@ table {
 
   @media 
 only screen and (max-width: 760px),
-(min-device-width: 768px) and (max-device-width: 1024px)  {
+(min-device-width: 768px) and (max-device-width: 1024px){
 
-	/* Force table to not be like tables anymore */
-	table, thead, tbody, th, td, tr { 
-		display: block; 
-	}
-	
-	/* Hide table headers (but not display: none;, for accessibility) */
-	thead tr { 
-		position: absolute;
-		top: -9999px;
-		left: -9999px;
-	}
-	
-	tr { border: 1px solid #ccc; }
-	
-	td { 
-		/* Behave  like a "row" */
-		border: none;
-		border-bottom: 1px solid #eee; 
-		position: relative;
-		padding-left: 50%; 
-	}
-	
-	td:before { 
-		/* Now like a table header */
-		position: absolute;
-		/* Top/left values mimic padding */
-		top: 6px;
-		left: 6px;
-		width: 45%; 
-		padding-right: 10px; 
-		white-space: nowrap;
-	}
-	
-	/*
-	Label the data
-	*/
-	td:nth-of-type(1):before { content: "First Name"; }
-	td:nth-of-type(2):before { content: "Last Name"; }
-	td:nth-of-type(3):before { content: "Job Title"; }
-	td:nth-of-type(4):before { content: "Favorite Color"; }
-	td:nth-of-type(5):before { content: "Wars of Trek?"; }
-	td:nth-of-type(6):before { content: "Secret Alias"; }
-	td:nth-of-type(7):before { content: "Date of Birth"; }
-	td:nth-of-type(8):before { content: "Dream Vacation City"; }
-	td:nth-of-type(9):before { content: "GPA"; }
-	td:nth-of-type(10):before { content: "Arbitrary Data"; }
 }
     
 </style>

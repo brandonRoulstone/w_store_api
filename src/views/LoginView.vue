@@ -30,7 +30,7 @@
                   </div>
                   <div class="checkbox mb-3">
                     <label>
-                      <input type="checkbox" value="user_deets"> Accept T's&c's
+                      <input type="checkbox" value="user_deets" required> Accept T's&c's
                     </label>
                   </div>
                   <div class="d-flex gap-1 mt-2">

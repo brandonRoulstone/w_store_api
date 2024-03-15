@@ -99,7 +99,7 @@ export default {
 
     #txtHeight{
         overflow: scroll;
-        max-height: 23px;
+        max-height: 45px;
     }
 
     @media (max-width: 580px) {

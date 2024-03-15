@@ -3,9 +3,14 @@
         <img :src="product.product_img" :alt="product.product_name" />
         {{ product.product_name }}
     </div>
+    <addToCartBtn />
 </template>
 <script>
+import addToCartBtn from '../components/addToCartBtn.vue'
 export default {
+    components : {
+        addToCartBtn
+    },
     methods : {
         fetchProduct(product_id){
             this.$store.dispatch('fetchProduct', product_id)
@@ -13,6 +18,6 @@ export default {
     }
 }
 </script>
-<style lang="">
+<style scoped>
     
 </style>

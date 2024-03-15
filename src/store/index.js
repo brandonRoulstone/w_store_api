@@ -97,11 +97,17 @@ export default createStore({
       const res = await axios.patch(`https://w-store-api.onrender.com/users/${update.user_id}`, update)
       window.location.reload()
      },
-     async addNewUser(context){
-      const res = await axios.post(`https://w-store-api.onrender.com/users`)
+     async addNewUser(context, adminPayload){
+      console.log(adminPayload)
+      const res = await axios.post(`https://w-store-api.onrender.com/users`, adminPayload);
+      window.location.reload()
      },
      async updateProducts(context, update){
       const res = await axios.patch(`https://w-store-api.onrender.com/products/${update.product_id}`, update);
+      window.location.reload()
+     },
+     async addProduct(context, userpayload){
+      const res = await axios.post(`https://w-store-api.onrender.com/products`, userpayload)
       window.location.reload()
      }
 
