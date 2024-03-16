@@ -7,11 +7,10 @@
                 <p class="col-lg-10 fs-4">Below is an example form built entirely with Bootstrap’s form controls. Each required form group has a validation state that can be triggered by attempting to submit the form without completing it.</p>
               </div>
               <div class="col-md-10 mx-auto col-lg-5">
-                <!-- <form class="p-4 p-md-5 border rounded-3 bg-body-tertiary"> -->
-                  <!-- <div class="form-floating mb-3">
+                  <div class="form-floating mb-3">
                     <input type="text" class="form-control" id="floatingName" placeholder="Your name" v-model="user_profile">
                     <label for="floatingName">Name</label>
-                  </div> -->
+                  </div>
                   <div class="form-floating mb-3">
                     <input type="email" class="form-control" id="floatingEmail" placeholder="name@example.com" v-model="user_email">
                     <label for="floatingEmail">Email address</label>
@@ -25,28 +24,30 @@
                     <label for="floatingRole">Identity code</label>
                   </div>
                   <div class="form-floating mb-3">
-                    <input type="text" class="form-control" id="floatingRole" placeholder="Specify your role to access as admin" v-model="user_role" v-if="this.user_email === 'JD1@gmail.com'">
-                    <label for="floatingRole" v-if="this.user_email === 'JD1@gmail.com'">Specify your role to access as admin</label>
-                  </div>
-                  <!-- <div class="form-floating mb-3">
                     <input type="text" class="form-control" id="floatingImgInput" placeholder="image" v-model="user_image">
                     <label for="floatingImgInput">image</label>
+                  </div>
+                  <!-- <div class="checkbox mb-3">
+                    <label>
+                      <input type="checkbox" value="user_deets" v-model="user_role" required> Accept T's&c's
+                    </label>
                   </div> -->
                   <div class="d-flex gap-1 mt-2">
-                    <button class="w-100 btn btn-lg btn-primary" type="submit" @click="loginUser()">login</button>
+                    <button 
+                         class="w-100 btn btn-lg btn-dark"
+                         type="submit"
+                         v-if="this.user_profile.length === 0 || this.user_email.length === 0 || this.user_password.length === 0 || this.user_password.length < 5 || this.user_image.length === 0"
+                         disabled
+                    >Fill in your details</button>
+                    <button @click="signUser()" class="w-100 btn btn-lg btn-primary" v-else>Sign up <i class="fa-regular fa-user fa-bounce fa-lg" style="color: #000000;"></i></button>
                   </div>
                   <hr class="my-4">
-                  <small class="text-body-secondary"><router-link to="/signup">Click here to create an account</router-link></small>
+                  <small class="text-body-secondary"><router-link to="/login">I have an account</router-link></small>
                 <div id="eerTxt"></div>
               </div>
             </div>
           </div>
     </div>
-    <!--"user_profile": "JohnDoe",
-        "user_email": "JD1@gmail.com",
-        "user_password": "john",
-        "user_role": "admin",
-        "user_image": "nothing"-->
 </template>
 <script>
 export default {
@@ -62,6 +63,11 @@ export default {
       }
     },
     methods : {
+      signUser(){
+        console.log(this.$data.user_profile)
+        this.$store.dispatch('SignUser', this.$data)
+        window.location.reload()
+      },
       loginUser(){
         // console.log(this.$data.user_profile)
         this.$store.dispatch('loginUser', this.$data)
