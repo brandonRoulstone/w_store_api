@@ -13,7 +13,7 @@
                     <router-link class="nav-link" to="/">Home</router-link>
                     <router-link class="nav-link" to="/about">About</router-link> 
                     <router-link class="nav-link" to="/products">products</router-link> 
-                    <router-link class="nav-link" to="/admin" v-if="$cookies.get('jwt')">Admin</router-link> 
+                    <router-link class="nav-link" id="usersRole" to="/admin" v-if="$cookies.get('jwt') && $cookies.get('role') === 'admin'">Admin</router-link> 
                     <router-link class="nav-link" to="/profile" v-if="$cookies.get('jwt')">profile</router-link>
                     <router-link class="nav-link" to="/login">login</router-link>
                     <router-link class="nav-link" id="cartXYZ" to="/cart" v-if="$cookies.get('jwt')"><i class="fa-solid fa-cart-shopping fa-lg" style="color: #0497c9;"></i> <span>{{count}}</span></router-link>
@@ -41,6 +41,16 @@ export default {
     },
     logOut(){
       this.$store.dispatch('logoutUser')
+    },
+    checkRole(){
+      // this.$store.dispatch('loginUser')
+      const userRole = $cookies.get('role')
+      console.log(userRole)
+      if(userRole === 'admin'){
+        console.log('you have access');
+      } else {
+        console.log(`no access you are ${userRole}`);
+      }
     }
   }
     

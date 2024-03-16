@@ -1,8 +1,12 @@
 <template>
 
-<div class="p-5 mt-5">
+<div class="p-5 mt-5" v-if="$cookies.get('role') === 'admin'">
     
   <h1>Manage products in store</h1>
+
+  <button @click="console.log($cookies.get('role') === 'admin')">
+   click
+  </button>
 
   <div id="products" class="gap-4">
     <div v-for="product in $store.state.products" v-bind:key="product.product_id">
@@ -193,6 +197,13 @@
 </div>
 
 
+<div id="" class="mt-5 pt-5 container" v-else>
+
+  <h1>This page does not Exist</h1>
+
+</div>
+
+
 <!-- <div>
   <ChartComp />
 </div> -->
@@ -283,6 +294,16 @@ export default {
 
             this.$store.dispatch('addProduct', this.$data);
 
+          }
+        },
+        checkRole(){
+          // this.$store.dispatch('loginUser')
+          const userRole = $cookies.get('role')
+          console.log(userRole)
+          if(userRole === 'admin'){
+            console.log('you have access');
+          } else {
+            console.log(`no access u are ${userRole}`);
           }
         }
     },

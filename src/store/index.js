@@ -59,11 +59,12 @@ export default createStore({
 
         const res = await axios.post(`https://w-store-api.onrender.com/login`, userInfoIsValid)
 
-        context.commit('accessUserIsLogged', res.data)
+        // context.commit('accessUserIsLogged', res.data.role)
 
-        console.log(res.data.user_email);
+        console.log(res.data.role);
 
         $cookies.set('jwt',res.data.token);
+        $cookies.set('role', res.data.role)
 
         alert(res.data.msg)
 

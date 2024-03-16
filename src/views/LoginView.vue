@@ -34,7 +34,7 @@
                     </label>
                   </div>
                   <div class="d-flex gap-1 mt-2">
-                    <button class="w-100 btn btn-lg btn-primary" type="submit" @click="signUser()">Register</button>
+                    <button class="w-100 btn btn-lg btn-primary" type="submit" @click="signUser()">create acc</button>
                     <button class="w-100 btn btn-lg btn-primary" type="submit" @click="loginUser()">login</button>
                   </div>
                   <hr class="my-4">
@@ -57,11 +57,11 @@ export default {
     data(){
       return {
         user_id : null,
-        user_profile : null,
-        user_email : null,
-        user_password : null,
-        user_role : null,
-        user_image : null
+        user_profile : '',
+        user_email : '',
+        user_password : '',
+        user_role : '',
+        user_image : ''
       }
     },
     methods : {
