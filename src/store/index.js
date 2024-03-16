@@ -8,7 +8,7 @@ export default createStore({
     products:[],
     product:[],
     users: [],
-    loggedUser : []
+    loggedUser: []
   },
   getters: {
   },
@@ -23,7 +23,7 @@ export default createStore({
       state.users = payload
     },
     accessUserIsLogged(state, payload){
-      state.users = payload
+      state.loggedUser = payload
     }
   },
   actions: {
@@ -79,7 +79,6 @@ export default createStore({
      },
      async logoutUser(){
       let cookies=$cookies.keys()
-      console.log(cookies)
       $cookies.remove('jwt')
       await router.push('/')
       window.location.reload()
@@ -98,6 +97,15 @@ export default createStore({
         }
       }
      },
+      async adminAuth(context){
+        try {
+          const res = await axios.get(`https://w-store-api.onrender.com/users`)
+          console.log(res.data)
+          context.commit('accessUserIsLogged', res.data)
+        } catch (error) {
+
+        }
+      },
      async deleteUser(context, user_id){
       const res = await axios.delete(`https://w-store-api.onrender.com/users/${user_id}`)
       window.location.reload()

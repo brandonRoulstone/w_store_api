@@ -2,7 +2,7 @@
     <div id="box">
         <h1>{{$store.state.loggedUser}}</h1>
         <div v-for="user in $store.state.loggedUser" v-bind:key="user.user_id">
-            <!-- {{ user.user_id }} -->
+            <!-- {{ user.user_role }} -->
         </div>
     </div>
 </template>
@@ -10,9 +10,12 @@
 export default {
     methods : {
         userIsLogged(){
-            this.$store.dispatch('loginUser')
+            this.$store.dispatch('adminAuth')
         }
-    }
+    },
+    mounted() {
+        this.userIsLogged()
+    },
 }
 </script>
 <style scoped>
