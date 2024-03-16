@@ -160,39 +160,7 @@
     <div id="errTxt"></div>
 
 
-    <div class="mt-3" id="boxXD">
-
-      <h1>Add a product</h1>
-<!-- product_name, product_desc, product_price, prooduct_img, product_category -->
-      <div class="input-group flex-nowrap mb-2">
-        <span class="input-group-text" id="addon-wrapping" v-if="product_name.length === 0"><i class="fa-solid fa-tags fa-xl" style="color: #ff0000;"></i></span>
-        <span class="input-group-text" id="addon-wrapping" v-else><i class="fa-solid fa-tags fa-xl" style="color: #11ff00;"></i></span>
-        <input type="text" class="form-control" placeholder="product_name" aria-label="product_name" aria-describedby="addon-wrapping" v-model="product_name" required>
-      </div>
-      <div class="input-group flex-nowrap mb-2">
-        <span class="input-group-text" id="addon-wrapping" v-if="product_desc.length === 0"><i class="fa-solid fa-pencil fa-xl" style="color: #ff0000;"></i></span>
-        <span class="input-group-text" id="addon-wrapping" v-else><i class="fa-solid fa-pencil fa-xl" style="color: #11ff00;"></i></span>
-        <input type="text" class="form-control" placeholder="product_desc" aria-label="product_desc" aria-describedby="addon-wrapping" v-model="product_desc" required>
-      </div>
-      <div class="input-group flex-nowrap mb-2">
-        <span class="input-group-text" id="addon-wrapping" v-if="product_price.length === 0"><i class="fa-solid fa-dollar-sign fa-xl" style="color: #ff0000;"></i></span>
-        <span class="input-group-text" id="addon-wrapping" v-else><i class="fa-solid fa-dollar-sign fa-xl" style="color: #11ff00;"></i></span>
-        <input type="text" class="form-control" placeholder="product_price" aria-label="product_price" aria-describedby="addon-wrapping" v-model="product_price" required>
-      </div>
-      <div class="input-group flex-nowrap mb-2">
-        <span class="input-group-text" id="addon-wrapping" v-if="product_img.length === 0"><i class="fa-solid fa-image fa-xl" style="color: #ff0000;"></i></span>
-        <span class="input-group-text" id="addon-wrapping" v-else><i class="fa-regular fa-image fa-xl" style="color: #11ff00;"></i></span>
-        <input type="text" class="form-control" placeholder="product_image" aria-label="product_image" aria-describedby="addon-wrapping" v-model="product_img" required>
-      </div>
-      <div class="input-group flex-nowrap mb-2">
-        <span class="input-group-text" id="addon-wrapping" v-if="product_category.length === 0"><i class="fa-solid fa-list fa-xl" style="color: #ff0000;"></i></span>
-        <span class="input-group-text" id="addon-wrapping" v-else><i class="fa-solid fa-list fa-xl" style="color: #11ff00;"></i></span>
-        <input type="text" class="form-control" placeholder="product_category" aria-label="product_category" aria-describedby="addon-wrapping" v-model="product_category" required>
-      </div>
-      <button class="btn btn-outline-dark" v-if="product_img.length === 0 || product_name.length === 0 || product_price.length === 0 || product_desc.length === 0 || product_category.length === 0" disabled>fill in all input fields</button>
-      <button class="btn btn-outline-primary" v-else @click="addProduct()">Add product to Database <i class="fa-solid fa-database fa-bounce fa-xl" style="color: blue;"></i></button>
-      <div id="errOnInput"></div>
-    </div>
+   <addProductComp/>
   </div>
 </div>
 
@@ -211,6 +179,7 @@
 </template>
 <script>
 import ChartComp from '../components/ChartComp.vue'
+import addProductComp from '../components/addProductComp.vue'
 export default {
 
     data(){
@@ -234,7 +203,8 @@ export default {
     },
 
     components : {
-      ChartComp
+      ChartComp,
+      addProductComp
     },
 
     methods : {
@@ -282,17 +252,6 @@ export default {
           } else {
 
             this.$store.dispatch('addNewUser', this.$data)
-
-          }
-        },
-        addProduct(){
-          if(this.product_name.length === 0 || this.product_desc.length === 0 || this.product_price.length === 0 || this.product_img.length === 0 || this.product_category.length === 0){
-
-            console.log('input pls')
-
-          }else {
-
-            this.$store.dispatch('addProduct', this.$data);
 
           }
         },

@@ -80,6 +80,7 @@ export default createStore({
      async logoutUser(){
       let cookies=$cookies.keys()
       $cookies.remove('jwt')
+      $cookies.remove('jwt')
       await router.push('/')
       window.location.reload()
      },
