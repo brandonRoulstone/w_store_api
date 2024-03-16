@@ -161,6 +161,7 @@
 
 
    <addProductComp/>
+   
   </div>
 </div>
 

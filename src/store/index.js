@@ -8,7 +8,8 @@ export default createStore({
     products:[],
     product:[],
     users: [],
-    loggedUser: []
+    loggedUser: [],
+    cart: []
   },
   getters: {
   },
@@ -24,7 +25,11 @@ export default createStore({
     },
     accessUserIsLogged(state, payload){
       state.loggedUser = payload
+    },
+    accessCart(state, payload){
+      state.cart = payload
     }
+    
   },
   actions: {
     async fetchProducts(context){
@@ -128,6 +133,13 @@ export default createStore({
      async addProduct(context, userpayload){
       const res = await axios.post(`https://w-store-api.onrender.com/products`, userpayload)
       window.location.reload()
+     },
+     async cart(context){
+      const res = await axios.get(`https://w-store-api.onrender.com/cart`)
+      context.commit('accessCart', res.data)
+     },
+     async addToCart(context,product_id,user_id){
+      const res = await axios.post(`https://w-store-api.onrender.com/cart/${product_id}?user_id=${user_id}`,product_id, user_id)
      }
 
   },
