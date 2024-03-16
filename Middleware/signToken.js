@@ -9,40 +9,49 @@ const authenticate = async (req, res, next) => {
 
     const {user_profile, user_email, user_password, user_role, user_image} = req.body;
 
-    const hashedpwd = await checkUser(user_email, user_role);
+    try {
+        const hashedpwd = await checkUser(user_email, user_role);
 
-    bcrypt.compare(user_password, hashedpwd, (err, result) => {
-        
-        if (err) throw err
-
-        if(result === true){
-
-            const {user_email, user_role} = req.body;
-
-            const token = jwt.sign({user_email:user_email, user_role: user_role}, process.env.SECRET_KEY, {expiresIn: '1h'});
-
-            res.cookie('jwt', token, {httpOnly: false, expiresIn: '1h'});
+        bcrypt.compare(user_password, hashedpwd, (err, result) => {
             
-            // console.log(token)
-            res.send({
-                token: token,
-                role: user_role,
-                msg: 'you logged in'
-            })
+            if (err) throw err
+    
+            if(result === true){
+    
+                const {user_email, user_role} = req.body;
+    
+                const token = jwt.sign({user_email:user_email, user_role: user_role}, process.env.SECRET_KEY, {expiresIn: '1h'});
+                const refreshToken = jwt.sign({ user_email: user_email, user_role: user_role }, process.env.REFRESH_TOKEN, { expiresIn: '1d' });
+    
+                res.cookie('jwt', token, {httpOnly: false, expiresIn: '1h'});
+                res.cookie('refreshToken', refreshToken, { httpOnly: true, expiresIn: '1d' });
+                
+                // console.log(token)
+                res.send({
+                    token: token,
+                    role: user_role,
+                    msg: 'you logged in'
+                })
+    
+                next(); 
+    
+            } else {
+    
+                res.send({
+    
+                    res: res.statusCode,
+                    msg : 'the password does not match'
+    
+                });
+    
+            } 
+        });
+    } catch (error) {
 
-            next(); 
-
-        } else {
-
-            res.send({
-
-                res: res.statusCode,
-                msg : 'the password does not match'
-
-            });
-
-        } 
-    });
+        console.error('Error during authentication:', error);
+        res.status(500).send({ msg: 'Internal server error' });
+        
+    }
 }
 
 export default authenticate;
