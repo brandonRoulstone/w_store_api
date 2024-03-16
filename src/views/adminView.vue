@@ -163,16 +163,16 @@
     <div class="mt-3" id="boxXD">
 
       <h1>Add a product</h1>
-
-      <div class="input-group flex-nowrap mb-2">
-        <span class="input-group-text" id="addon-wrapping" v-if="product_img.length === 0"><i class="fa-solid fa-image fa-xl" style="color: #ff0000;"></i></span>
-        <span class="input-group-text" id="addon-wrapping" v-else><i class="fa-regular fa-image fa-xl" style="color: #11ff00;"></i></span>
-        <input type="text" class="form-control" placeholder="product_image" aria-label="product_image" aria-describedby="addon-wrapping" v-model="product_img" required>
-      </div>
+<!-- product_name, product_desc, product_price, prooduct_img, product_category -->
       <div class="input-group flex-nowrap mb-2">
         <span class="input-group-text" id="addon-wrapping" v-if="product_name.length === 0"><i class="fa-solid fa-tags fa-xl" style="color: #ff0000;"></i></span>
         <span class="input-group-text" id="addon-wrapping" v-else><i class="fa-solid fa-tags fa-xl" style="color: #11ff00;"></i></span>
         <input type="text" class="form-control" placeholder="product_name" aria-label="product_name" aria-describedby="addon-wrapping" v-model="product_name" required>
+      </div>
+      <div class="input-group flex-nowrap mb-2">
+        <span class="input-group-text" id="addon-wrapping" v-if="product_desc.length === 0"><i class="fa-solid fa-pencil fa-xl" style="color: #ff0000;"></i></span>
+        <span class="input-group-text" id="addon-wrapping" v-else><i class="fa-solid fa-pencil fa-xl" style="color: #11ff00;"></i></span>
+        <input type="text" class="form-control" placeholder="product_desc" aria-label="product_desc" aria-describedby="addon-wrapping" v-model="product_desc" required>
       </div>
       <div class="input-group flex-nowrap mb-2">
         <span class="input-group-text" id="addon-wrapping" v-if="product_price.length === 0"><i class="fa-solid fa-dollar-sign fa-xl" style="color: #ff0000;"></i></span>
@@ -180,9 +180,9 @@
         <input type="text" class="form-control" placeholder="product_price" aria-label="product_price" aria-describedby="addon-wrapping" v-model="product_price" required>
       </div>
       <div class="input-group flex-nowrap mb-2">
-        <span class="input-group-text" id="addon-wrapping" v-if="product_desc.length === 0"><i class="fa-solid fa-pencil fa-xl" style="color: #ff0000;"></i></span>
-        <span class="input-group-text" id="addon-wrapping" v-else><i class="fa-solid fa-pencil fa-xl" style="color: #11ff00;"></i></span>
-        <input type="text" class="form-control" placeholder="product_desc" aria-label="product_desc" aria-describedby="addon-wrapping" v-model="product_desc" required>
+        <span class="input-group-text" id="addon-wrapping" v-if="product_img.length === 0"><i class="fa-solid fa-image fa-xl" style="color: #ff0000;"></i></span>
+        <span class="input-group-text" id="addon-wrapping" v-else><i class="fa-regular fa-image fa-xl" style="color: #11ff00;"></i></span>
+        <input type="text" class="form-control" placeholder="product_image" aria-label="product_image" aria-describedby="addon-wrapping" v-model="product_img" required>
       </div>
       <div class="input-group flex-nowrap mb-2">
         <span class="input-group-text" id="addon-wrapping" v-if="product_category.length === 0"><i class="fa-solid fa-list fa-xl" style="color: #ff0000;"></i></span>
