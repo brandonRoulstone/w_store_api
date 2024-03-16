@@ -91,10 +91,10 @@ const removeFromCart = async (product_id) => {
 
 // user verification ============
 
-const checkUser = async (user_email) => {
+const checkUser = async (user_email, user_role) => {
     const [[{user_password}]] = await pool.query(`
-        SELECT user_password FROM users WHERE user_email = ?
-    `, [user_email])
+        SELECT user_password FROM users WHERE user_email = ? AND user_role = ?
+    `, [user_email, user_role])
     return user_password
 }
 
