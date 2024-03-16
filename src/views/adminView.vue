@@ -66,18 +66,22 @@
 
   <h1 class="mt-5 pt-5">Manage users</h1>
   <div id="container">
-    <div class="mx-4" v-for="user in $store.state.users" v-bind:key="user">
+    <div class="mx-4" v-for="user in $store.state.users" v-bind:key="user.user_id">
 
       <div class="" id="card" style="width: 18rem;">
-        <img :src="user.user_image" class="card-img-top" :alt="user.user_profile" id="userImg">
+        <router-link @click="getUser(user.user_id)" :to="{ name: 'admi', params: { userId: user.user_id }}" class="card-img-top">
+          <img :src="user.user_image" :alt="user.user_profile" id="userImg">
+        </router-link>
         <div class="card-body">
 
           <h5 class="card-title">{{ user.user_profile }}</h5>
+          <h5 class="card-title">{{ user.user_id }}</h5>
 
           <p class="card-text">{{ user.user_email }}</p>
           <p class="card-text">{{ user.user_role }}</p>
           <!-- <p class="card-text">{{ user.user_password }}</p> -->
           <div class="d-flex justify-content-evenly">
+            <!-- <router-link @click="getUser(user.user_id)" :to="{ name: 'admi', params: { userId: user.user_id }}" class="btn btn-dark">User deets</router-link> -->
             <button type="button" class="btn btn-primary mx-1" data-bs-toggle="modal" :data-bs-target="'#exampleModal' + user.user_id">
               update
             </button>
@@ -265,6 +269,9 @@ export default {
           } else {
             console.log(`no access u are ${userRole}`);
           }
+        },
+        getUser(id){
+          this.$store.dispatch('getUser', id)
         }
     },
     mounted(){
@@ -332,17 +339,18 @@ export default {
     overflow-x: scroll;
 }
 
-  #card{
-    display: flex !important;
-  }
+#card{
+  display: flex !important;
+}
 
-  #userImg{
-    object-fit: contain;
-    scale: 60%;
-    height: 150px;
-    border-radius: 50%;
-    border: 1px solid black;
-  }
+#userImg{
+  object-fit: contain;
+  scale: 60%;
+  height: 150px;
+  width: 150px;
+  border-radius: 50%;
+  border: 1px solid black;
+}
 
 
 

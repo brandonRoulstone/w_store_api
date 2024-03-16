@@ -8,6 +8,7 @@ export default createStore({
     products:[],
     product:[],
     users: [],
+    user: [],
     loggedUser: [],
     cart: []
   },
@@ -22,6 +23,9 @@ export default createStore({
     },
     accessUsers(state, payload){
       state.users = payload
+    },
+    accessUser(state, payload){
+      state.user = payload
     },
     accessUserIsLogged(state, payload){
       state.loggedUser = payload
@@ -99,9 +103,13 @@ export default createStore({
         if (error.response && error.response.status === 401) {
           alert("Invalid credentials");
         } else {
-            console.error('An error occurred:', error);
+          console.error('An error occurred:', error);
         }
       }
+     },
+     async getUser(context, id){
+      const res = await axios.get(`https://w-store-api.onrender.com/users/${id}`)
+      context.commit('accessUser', res.data)
      },
       async adminAuth(context){
         try {
