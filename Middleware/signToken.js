@@ -17,6 +17,8 @@ const authenticate = async (req, res, next) => {
             if (err) throw err
     
             if(result === true){
+
+                const {user_id} = +req.params.id
     
                 const {user_email, user_role} = req.body;
     
@@ -29,6 +31,7 @@ const authenticate = async (req, res, next) => {
                 // console.log(token)
                 res.send({
                     token: token,
+                    id: user_id,
                     role: user_role,
                     msg: 'you logged in'
                 })
