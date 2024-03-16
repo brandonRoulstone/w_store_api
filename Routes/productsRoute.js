@@ -1,6 +1,5 @@
 import express from 'express';
 import controller from '../Controllers/productController.js';
-import isRoleEquiqToAdmin from '../Middleware/roleStatus.js';
 
 const router = express.Router();
 
