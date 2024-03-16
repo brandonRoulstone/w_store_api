@@ -2,7 +2,7 @@ import { config } from 'dotenv';
 config();
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt'
-import { checkUser } from '../Model/db.js';
+import { checkUser, getUserByID } from '../Model/db.js';
 
 
 const authenticate = async (req, res, next) => {
@@ -12,21 +12,21 @@ const authenticate = async (req, res, next) => {
     try {
         const hashedpwd = await checkUser(user_email, user_role);
 
-        bcrypt.compare(user_password, hashedpwd, (err, result) => {
+        bcrypt.compare(user_password, hashedpwd, async (err, result) => {
             
             if (err) throw err
     
             if(result === true){
 
-                const {user_id} = +req.params.id
+                const user_id = await getUserByID(+req.params.id)
     
                 const {user_email, user_role} = req.body;
     
-                const token = jwt.sign({user_email:user_email, user_role: user_role}, process.env.SECRET_KEY, {expiresIn: '1h'});
+                const token = jwt.sign({user_email:user_email, user_role: user_role, user_id: user_id}, process.env.SECRET_KEY, {expiresIn: '1h'});
                 const refreshToken = jwt.sign({ user_email: user_email, user_role: user_role }, process.env.REFRESH_TOKEN, { expiresIn: '1d' });
     
                 res.cookie('jwt', token, {httpOnly: false, expiresIn: '1h'});
-                res.cookie('refreshToken', refreshToken, { httpOnly: true, expiresIn: '1d' });
+                res.cookie('refreshToken', refreshToken, { httpOnly: false, expiresIn: '1d' });
                 
                 // console.log(token)
                 res.send({
