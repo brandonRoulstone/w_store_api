@@ -31,6 +31,9 @@ const authenticate = async (req, res, next) => {
                     token: token,
                     refreshToken: refreshToken,
                     role: user_role,
+                    email: user_email,
+                    name: user_profile,
+                    user_image: user_image,
                     msg: 'you logged in'
                 })
     
