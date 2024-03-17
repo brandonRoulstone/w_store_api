@@ -29,6 +29,7 @@ const authenticate = async (req, res, next) => {
                 // console.log(token)
                 res.send({
                     token: token,
+                    refreshToken: refreshToken,
                     role: user_role,
                     msg: 'you logged in'
                 })
