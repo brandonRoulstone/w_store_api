@@ -152,6 +152,7 @@ export default createStore({
       window.location.reload()
      },
      async addToCart(context,userValidity){
+      // returned raw data into query for testing
       const res = await axios.post(`https://w-store-api.onrender.com/cart/${userValidity}?user_id=3`,userValidity)
       // context.commit('accessCart', userValidity)
      },
