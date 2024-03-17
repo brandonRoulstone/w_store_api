@@ -1,7 +1,7 @@
 <template>
     <div class="mt-5 pt-5">
-        <h1>Cart view</h1>
-        <div v-for="cart in $store.state.cart" v-bind:key="cart.product_id">
+        <h1>{{ $store.state.cart }}</h1>
+        <div v-for="cart in getCart()" v-bind:key="cart.cart_id">
             {{ cart }}
         </div>
     </div>
@@ -9,12 +9,12 @@
 <script>
 export default {
     methods : {
-        cart(){
-            this.$store.dispatch('cart')
+        getCart(){
+            this.$store.dispatch('getCart')
         }
     },
     mouted(){
-        this.cart()
+        this.getCart()
     }
 }
 </script>

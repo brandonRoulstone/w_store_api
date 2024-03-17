@@ -151,14 +151,13 @@ export default createStore({
       const res = await axios.post(`https://w-store-api.onrender.com/products`, userpayload)
       window.location.reload()
      },
-     async cart(context){
+     async addToCart(context,userValidity){
+      const res = await axios.post(`https://w-store-api.onrender.com/cart/${userValidity}?user_id=3`,userValidity)
+      // context.commit('accessCart', userValidity)
+     },
+     async getCart(context){
       const res = await axios.get(`https://w-store-api.onrender.com/cart`)
       context.commit('accessCart', res.data)
-     },
-     async addToCart(context,userValidity){
-      console.log(`this>>` + userValidity.user_id, `this>>` + userValidity);
-      const res = await axios.post(`https://w-store-api.onrender.com/cart/${userValidity}?user_id=${userValidity.user_id}`,userValidity)
-      context.commit('accessCart', userValidity)
      }
 
   },
