@@ -146,8 +146,10 @@ export default createStore({
       const res = await axios.get(`https://w-store-api.onrender.com/cart`)
       context.commit('accessCart', res.data)
      },
-     async addToCart(context,product_id,user_id){
-      const res = await axios.post(`https://w-store-api.onrender.com/cart/${product_id}?user_id=${user_id}`,product_id, user_id)
+     async addToCart(context,userValidity){
+      console.log(`this>>` + userValidity.user_id, `this>>` + userValidity);
+      const res = await axios.post(`https://w-store-api.onrender.com/cart/${userValidity}?user_id=${userValidity.user_id}`,userValidity)
+      context.commit('accessCart', userValidity)
      }
 
   },

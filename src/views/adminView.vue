@@ -75,7 +75,6 @@
         <div class="card-body">
 
           <h5 class="card-title">{{ user.user_profile }}</h5>
-          <h5 class="card-title">{{ user.user_id }}</h5>
 
           <p class="card-text">{{ user.user_email }}</p>
           <p class="card-text">{{ user.user_role }}</p>
@@ -217,28 +216,26 @@ export default {
             this.$store.dispatch('getUsers');
         },
         updateUser(user_id){
-            let userObjX = {
-              user_id : user_id,
-              user_profile : this.user_profile,
-              user_email : this.user_email,
-              user_password : this.user_password,
-              user_role : this.user_role,
-              user_image : this.user_image
-            }
-            this.$store.dispatch('updateUser', userObjX);
-
-            console.log(this.$data, userObjX);
+          let userObjX = {
+            user_id : user_id,
+            user_profile : this.user_profile,
+            user_email : this.user_email,
+            user_password : this.user_password,
+            user_role : this.user_role,
+            user_image : this.user_image
+          }
+          this.$store.dispatch('updateUser', userObjX);
         },
         updateProduct(product_id){
-            let prodObjX = {
-              product_id : product_id,
-              product_name : this.product_name,
-              product_desc : this.product_desc,
-              product_price : this.product_price,
-              product_img : this.product_img,
-              product_category : this.product_category
-            }
-            this.$store.dispatch('updateProducts', prodObjX)
+          let prodObjX = {
+            product_id : product_id,
+            product_name : this.product_name,
+            product_desc : this.product_desc,
+            product_price : this.product_price,
+            product_img : this.product_img,
+            product_category : this.product_category
+          }
+          this.$store.dispatch('updateProducts', prodObjX)
 
         },
         deleteUser(user_id){
