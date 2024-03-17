@@ -91,7 +91,6 @@ export default createStore({
       }
      },
      async logoutUser(){
-      let cookies=$cookies.keys()
 
       $cookies.remove('jwt')
 
