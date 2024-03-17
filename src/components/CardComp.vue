@@ -12,7 +12,7 @@
     
         <div class="mt-2 pt-5 px-2 container" id="cardBox">
 
-            <div class="card m-1 d-flex" style="width: 18rem;" v-for='product in searchByName() || sortBy()' v-bind:key='product.product_id'>
+            <div class="card m-1" style="width: 18rem;" v-for='product in searchByName() || sortBy()' v-bind:key='product.product_id'>
 
                 <img :src="product.product_img" class="card-img-top" :alt="product.product_name" loading="lazy" id="productImg">
 
