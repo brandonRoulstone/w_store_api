@@ -69,8 +69,12 @@ export default createStore({
         const res = await axios.post(`https://w-store-api.onrender.com/login`, userInfoIsValid)
 
         console.log(res.data.role);
+        
+        console.log(res.data.refreshToken);
 
         $cookies.set('jwt',res.data.token);
+
+        $cookies.set('refreshToken',res.data.refreshToken);
 
         $cookies.set('role', res.data.role);
 
@@ -88,9 +92,15 @@ export default createStore({
      },
      async logoutUser(){
       let cookies=$cookies.keys()
+
       $cookies.remove('jwt')
+
+      $cookies.remove('refreshToken')
+
       $cookies.remove('role')
+
       await router.push('/')
+
       window.location.reload()
      },
 
