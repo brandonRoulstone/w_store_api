@@ -26,7 +26,7 @@ const auth = async (req, res, next) => {
                 if (refreshToken && refreshTokens[refreshToken]) {
                     jwt.verify(refreshToken, process.env.REFRESH_TOKEN, (err, decoded) => {
                         if (err) {
-                            console.log('in the first if statement')
+                            console.log('in the first if statement') 
                             return res.status(403).json({ error: 'Invalid Token 1' });
                         } else {
                             // Assigns a new token to the user once the 
