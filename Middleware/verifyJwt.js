@@ -32,6 +32,7 @@ const auth = async (req, res, next) => {
                             // Assigns a new token to the user once the 
                             const newToken = jwt.sign({ user_email: decoded.user_email }, process.env.REFRESH_TOKEN, { expiresIn: '1d' });
                             res.setHeader('Authorization', newToken);
+                            next();
                         }
                     });
                 }
