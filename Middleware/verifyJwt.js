@@ -26,7 +26,8 @@ const auth = async (req, res, next) => {
                 if (refreshToken && refreshTokens[refreshToken]) {
                     jwt.verify(refreshToken, process.env.REFRESH_TOKEN, (err, decoded) => {
                         if (err) {
-                            return res.status(403).json({ error: 'Invalid Token' });
+                            console.log('in the first if statement')
+                            return res.status(403).json({ error: 'Invalid Token 1' });
                         } else {
                             // Assigns a new token to the user once the 
                             const newToken = jwt.sign({ user_email: decoded.user_email }, process.env.REFRESH_TOKEN, { expiresIn: '1d' });
@@ -35,7 +36,8 @@ const auth = async (req, res, next) => {
                     });
                 }
             } else {
-                return res.status(403).json({ error: 'Invalid Token' });
+                console.log('after the if statement')
+                return res.status(403).json({ error: 'Invalid Token 2' });
             }
         }
         req.user_email = user;
