@@ -36,8 +36,8 @@ app.delete('/logout', (req, res) => {
 });
 
 app.use('/products', productsRoute);
-app.use('/cart',verifyJwt, cartRoute);
-app.use('/users',verifyJwt, userRoute);
+app.use('/cart', cartRoute);
+app.use('/users', userRoute);
 
 app.listen(PORT, console.log(`server running on http://localhost:${PORT}`));
 

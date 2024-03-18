@@ -21,10 +21,10 @@ const authenticate = async (req, res, next) => {
                 const {user_email, user_role} = req.body;
     
                 const token = jwt.sign({user_email:user_email, user_role: user_role}, process.env.SECRET_KEY, {expiresIn: '1h'});
-                const refreshToken = jwt.sign({ user_email: user_email, user_role: user_role }, process.env.REFRESH_TOKEN, { expiresIn: '1h' });
+                const refreshToken = jwt.sign({ user_email: user_email, user_role: user_role }, process.env.REFRESH_TOKEN, { expiresIn: '1d' });
     
-                res.cookie('jwt', token, {httpOnly: true, secure:true, sameSite:'none', expiresIn: '1h',});
-                res.cookie('refreshToken', refreshToken, { httpOnly: true, secure:true, sameSite:'none', expiresIn: '1h' });
+                res.cookie('jwt', token, {httpOnly: false, expiresIn: '1h'});
+                res.cookie('refreshToken', refreshToken, { httpOnly: false, expiresIn: '1d' });
                 
                 // console.log(token)
                 res.send({
