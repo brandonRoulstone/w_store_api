@@ -54,10 +54,14 @@ export default createStore({
         console.error('error has occurred')
       }
     },
+    async deleteProduct(context, product_id){
+      const res = await axios.delete(`https://w-store-api.onrender.com/products/${product_id}`);
+      window.location.reload()
+    },
      async SignUser(context, userpayload){
       try {
-        const res = await axios.post(`https://w-store-api.onrender.com/register`, userpayload)
-        alert(`Your account has been created ${res.data.user_profile}!`)
+        const res = await axios.post(`https://w-store-api.onrender.com/users`, userpayload)
+        alert(`Your account has been successfully created ${res.data.user_profile}!`)
         window.location.reload()
       } catch (error) {
         console.error('error has occurred')
@@ -134,7 +138,6 @@ export default createStore({
       window.location.reload()
      },
      async updateUser(context, update){
-      console.log(update.user_id)
       const res = await axios.patch(`https://w-store-api.onrender.com/users/${update.user_id}`, update)
       window.location.reload()
      },

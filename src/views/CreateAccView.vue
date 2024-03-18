@@ -33,12 +33,7 @@
                     </label>
                   </div> -->
                   <div class="d-flex gap-1 mt-2">
-                    <button 
-                         class="w-100 btn btn-lg btn-dark"
-                         type="submit"
-                         v-if="this.user_profile.length === 0 || this.user_email.length === 0 || this.user_password.length === 0 || this.user_password.length < 5 || this.user_image.length === 0"
-                         disabled
-                    >Fill in your details</button>
+                    <button class="w-100 btn btn-lg btn-dark" type="submit" v-if="this.user_profile.length === 0 || this.user_email.length === 0 || this.user_password.length === 0 || this.user_password.length < 5 || this.user_image.length === 0" disabled>Fill in your details</button>
                     <button @click="signUser()" class="w-100 btn btn-lg btn-primary" v-else>Sign up <i class="fa-regular fa-user fa-bounce fa-lg" style="color: #000000;"></i></button>
                   </div>
                   <hr class="my-4">
@@ -50,11 +45,11 @@
     </div>
 </template>
 <script>
+import router from '@/router';
 export default {
 
     data(){
       return {
-        user_id : null,
         user_profile : '',
         user_email : '',
         user_password : '',
@@ -64,13 +59,8 @@ export default {
     },
     methods : {
       signUser(){
-        console.log(this.$data.user_profile)
         this.$store.dispatch('SignUser', this.$data)
-        window.location.reload()
-      },
-      loginUser(){
-        // console.log(this.$data.user_profile)
-        this.$store.dispatch('loginUser', this.$data)
+        router.push('/login')
       }
     }
     

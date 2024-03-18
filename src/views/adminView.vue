@@ -16,7 +16,7 @@
           <h5 class="card-title">{{product.product_name}}</h5>
           <p class="card-text">R{{product.product_price}}</p>
           <p class="card-text" id="textOve">{{product.product_desc}}</p>
-          <button href="#" class="btn btn-danger mx-1"><i class="fa-solid fa-trash fa-lg" style="color: #ffffff;"></i></button>
+          <button @click="deleteProduct(product.product_id)" class="btn btn-danger mx-1"><i class="fa-solid fa-trash fa-lg" style="color: #ffffff;"></i></button>
           <button type="button" class="btn btn-primary" data-bs-toggle="modal" :data-bs-target="'#staticBackdrop' + product.product_id">
             update
           </button>
@@ -163,9 +163,9 @@
     <div id="errTxt"></div>
 
 
-   <addProductComp/>
-   
+    
   </div>
+  <addProductComp/>
 </div>
 
 
@@ -269,6 +269,9 @@ export default {
         },
         getUser(id){
           this.$store.dispatch('getUser', id)
+        },
+        deleteProduct(product_id){
+          this.$store.dispatch('deleteProduct', product_id)
         }
     },
     mounted(){
