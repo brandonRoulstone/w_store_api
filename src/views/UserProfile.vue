@@ -5,9 +5,16 @@
             <div>
                 <img :src="user.user_image" alt="" class="image-fluid" height="300" width="300">
             </div>
-            <div id="userCol">
-                {{ user.user_email }}
-                {{ user.user_profile }}
+            <div id="userCol" class="container-fluid mx-5">
+                <div class="fs-2">
+                    {{ user.user_email }}
+                </div>
+                <div class="fs-2">
+                    {{ user.user_profile }}
+                </div>
+                <div class="fs-2" id="overflow">
+                    {{ user.user_password }}
+                </div>
             </div>
         </div>
     </div>
@@ -39,5 +46,11 @@ export default {
 
     #userCol{
         display: flex;
+        flex-direction: column;
+    }
+
+    #overflow{
+        max-width: 238px;
+        overflow-x: scroll;
     }
 </style>

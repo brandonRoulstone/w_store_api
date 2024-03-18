@@ -16,7 +16,7 @@
                     <router-link class="nav-link" id="usersRole" to="/admin" v-if="$cookies.get('jwt') && $cookies.get('role') === 'admin'">Admin</router-link> 
                     <router-link class="nav-link" to="/profile" v-if="$cookies.get('jwt')">profile</router-link>
                     <router-link class="nav-link" to="/login">login</router-link>
-                    <router-link class="nav-link" id="cartXYZ" to="/cart" v-if="$cookies.get('jwt')"><i class="fa-solid fa-cart-shopping fa-lg" style="color: #0497c9;"></i> <span>{{count}}</span></router-link>
+                    <router-link class="nav-link" id="cartXYZ" to="/cart" v-if="$cookies.get('jwt')"><i class="fa-solid fa-cart-shopping fa-lg" style="color: #0497c9;"></i> <span>{{$store.state.cart.length}}</span></router-link>
                   </div>
                 </div>
                 <div>
