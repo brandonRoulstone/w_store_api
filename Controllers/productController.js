@@ -8,8 +8,8 @@ export default {
         res.send(await getProductByID(+req.params.id))
     },
     addProductToDB : async (req, res) => {
-        const {product_name, product_desc, product_price, prooduct_img, product_category} = req.body
-        await addProduct(product_name, product_desc, product_price, prooduct_img, product_category)
+        const {product_name, product_desc, product_price, product_img, product_category} = req.body
+        await addProduct(product_name, product_desc, product_price, product_img, product_category)
         res.send(await getProducts())
     },
     editProductByID : async (req, res) => {
@@ -19,7 +19,7 @@ export default {
 
         product_name ? product_name : {product_name} = product
 
-        product_desc ? product_desc : {product_desc} = product
+        product_desc ? product_desc : {product_desc} = product 
 
         product_price ? product_price : {product_price} = product
 

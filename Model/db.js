@@ -30,10 +30,10 @@ const deleteProduct = async(id) => {
     `, [id]);
 }
 
-const addProduct = async (product_name, product_desc, product_price, prooduct_img, product_category) => {
+const addProduct = async (product_name, product_desc, product_price, product_img, product_category) => {
     const [product] = await pool.query(`
-    INSERT INTO products (product_name, product_desc, product_price, prooduct_img, product_category) VALUES (?, ?, ?, ?, ?)
-    `,[product_name, product_desc, product_price, prooduct_img, product_category]);
+    INSERT INTO products (product_name, product_desc, product_price, product_img, product_category) VALUES (?, ?, ?, ?, ?)
+    `,[product_name, product_desc, product_price, product_img, product_category]);
     return getProducts(product.insertId)
 }
 
