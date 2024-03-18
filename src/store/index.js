@@ -149,6 +149,7 @@ export default createStore({
      },
      async addProduct(context, userpayload){
       const res = await axios.post(`https://w-store-api.onrender.com/products`, userpayload)
+      console.log(res.data);
       window.location.reload()
      },
      async addToCart(context,userValidity){

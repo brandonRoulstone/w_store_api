@@ -48,7 +48,6 @@ export default {
     data(){
         return{
             //products:
-            product_id: null,
             product_name : '',
             product_desc : '',
             product_price : '',
@@ -57,13 +56,14 @@ export default {
         }
     },
     methods : {
-        addProduct(){
+       async addProduct(){
           if(this.product_name.length === 0 || this.product_desc.length === 0 || this.product_price.length === 0 || this.product_img.length === 0 || this.product_category.length === 0){
 
             console.log('input pls')
 
           }else {
 
+            console.log(this.$data);
             this.$store.dispatch('addProduct', this.$data);
 
           }
