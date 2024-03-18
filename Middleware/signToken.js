@@ -11,7 +11,8 @@ const authenticate = async (req, res, next) => {
 
     try {
         const hashedpwd = await checkUser(user_email, user_role);
-        const validUserIsLoggedIn = await checkProfile(user_email)
+
+        const validUserIsLoggedIn = await checkProfile(user_email);
 
         bcrypt.compare(user_password, hashedpwd, (err, result) => {
             
@@ -34,7 +35,6 @@ const authenticate = async (req, res, next) => {
                     role: user_role,
                     email: user_email,
                     name: user_profile,
-                    user_image: user_image,
                     isLogged: validUserIsLoggedIn,
                     msg: 'you logged in'
                 })
