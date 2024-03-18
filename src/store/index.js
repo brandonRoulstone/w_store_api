@@ -72,23 +72,24 @@ export default createStore({
 
         const res = await axios.post(`https://w-store-api.onrender.com/login`, userInfoIsValid)
 
-        const [user] = res.isLogged;
-
-        console.log(user);
-
+        
         $cookies.set('jwt',res.data.token);
 
         $cookies.set('refreshToken',res.data.refreshToken);
 
         $cookies.set('role', res.data.role);
 
+        const user = res.data.isLogged;
+        
         alert(res.data.msg)
+        
+        const storage = JSON.stringify(user)
 
-        // data will be sent to the user profile view
+        localStorage.setItem('activeUser', storage)
 
-        await router.push('/')
-
-        window.location.reload()
+        await router.push('/profile')
+        
+        // window.location.reload()
 
       } catch (error) {
         console.error('error has occurred')
@@ -101,6 +102,8 @@ export default createStore({
       $cookies.remove('refreshToken')
 
       $cookies.remove('role')
+
+      localStorage.removeItem('activeUser')
 
       await router.push('/')
 
