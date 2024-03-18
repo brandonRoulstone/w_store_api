@@ -2,7 +2,7 @@ import { config } from 'dotenv';
 config();
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt'
-import { checkUser } from '../Model/db.js';
+import { checkUser, checkProfile } from '../Model/db.js';
 
 
 const authenticate = async (req, res, next) => {
@@ -11,6 +11,7 @@ const authenticate = async (req, res, next) => {
 
     try {
         const hashedpwd = await checkUser(user_email, user_role);
+        const validUserIsLoggedIn = await checkProfile(user_email)
 
         bcrypt.compare(user_password, hashedpwd, (err, result) => {
             
@@ -34,6 +35,7 @@ const authenticate = async (req, res, next) => {
                     email: user_email,
                     name: user_profile,
                     user_image: user_image,
+                    isLogged: validUserIsLoggedIn,
                     msg: 'you logged in'
                 })
     

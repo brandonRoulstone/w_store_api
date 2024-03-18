@@ -26,8 +26,6 @@ app.use(cookieParser());
 app.post('/login', authenticate, (req, res) => { 
 });
 
-app.use('/register', registerRoute);
-
 app.delete('/logout', (req, res) => {
     res.clearCookie('jwt')
     res.json({

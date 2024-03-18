@@ -144,9 +144,16 @@ const checkRoleStatus = async (user) => {
  ` , [user]);
     return user_role;
 }
+
+const checkProfile = async (user_email) => {
+    const [validUser] = await pool.query(`
+    SELECT * FROM users WHERE user_email = ?
+    `, [user_email]);
+    return validUser
+}
   
  
-export {getProducts, getProductByID, editProduct, deleteProduct, addProduct, getCart, insert, addToCart, removeFromCart, checkUser, getUsers, addUser, deleteUser, getUserByID, checkRoleStatus, editUser}
+export {getProducts, getProductByID, editProduct, deleteProduct, addProduct, getCart, insert, addToCart, removeFromCart, checkUser, getUsers, addUser, deleteUser, getUserByID, checkRoleStatus, editUser, checkProfile}
 
 
 
