@@ -8,7 +8,6 @@ import cartRoute from './Routes/cartRoute.js';
 import verifyJwt from './Middleware/verifyJwt.js'
 import userRoute from './Routes/userRoute.js';
 import authenticate from './Middleware/signToken.js';
-import registerRoute from './Routes/registerRoute.js';
 
 const app = express();
 const PORT = process.env.MYSQL_ADDON_PORT || 6896;
