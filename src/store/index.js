@@ -11,7 +11,8 @@ export default createStore({
     users: [],
     user: [],
     loggedUser: [],
-    cart: []
+    cart: [],
+    cartState: []
   },
   getters: {
   },
@@ -33,6 +34,9 @@ export default createStore({
     },
     accessCart(state, payload){
       state.cart = payload
+    },
+    addProd(state, payload){
+      state.cartState = payload
     }
     
   },
@@ -171,13 +175,32 @@ export default createStore({
       window.location.reload();
      },
      async addToCart(context,userValidity){
+
       const res = await axios.post(`https://w-store-api.onrender.com/cart/${userValidity}?user_id=${$cookies.get('userId')}`,userValidity);
-      // context.commit('accessCart', userValidity)
+
+      // const prodTarg = res.data.product;
+
+      // context.commit('addProd', prodTarg)
+
+      // $cookies.set('cart', prodTarg)
+
+      // console.log(prodTarg);
+
      },
      async getCart(context){
-      const res = await axios.get(`https://w-store-api.onrender.com/cart`)
+
+      const res = await axios.get(`https://w-store-api.onrender.com/cart`);
+
       context.commit('accessCart', res.data)
-     }
+      
+     },
+      async removeFromCart(context, TargProd){
+
+        const res = axios.delete(`https://w-store-api.onrender.com/cart/${TargProd}`);
+
+        localStorage.removeItem('cartKey');
+
+      }
 
   },
   modules: {
