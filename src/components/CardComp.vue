@@ -26,7 +26,7 @@
 
                   <p class="card-text">R {{product.product_price}}</p>
 
-                  <router-link @click="fetchProduct(product.product_id)" :to="{ name: 'product', params: { productId: product.product_id }} " class="btn btn-dark">details <i class="fa-regular fa-eye fa-sm" style="color: #ffffff;"></i></router-link>
+                  <router-link @click="fetchProduct(product.product_id)" :to="{ name: 'product', params: { productId: product.product_id }} " class="btn btn-dark"  v-if="$cookies.get('jwt')">details <i class="fa-regular fa-eye fa-sm" style="color: #ffffff;"></i></router-link>
 
                 </div>
 

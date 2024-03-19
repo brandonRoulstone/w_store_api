@@ -1,6 +1,7 @@
 import { createStore } from 'vuex';
 import axios from 'axios';
 import router from '@/router';
+import swal from 'sweetalert';
 axios.defaults.withCredentials = true
 
 export default createStore({
@@ -77,26 +78,32 @@ export default createStore({
         $cookies.set('refreshToken',res.data.refreshToken);
 
         $cookies.set('role', res.data.role);
-        const [u] = res.data.isLogged
-        $cookies.set('userId', u.user_id)
 
+        const [u] = res.data.isLogged
+
+        $cookies.set('userId', u.user_id)
+        
         const user = res.data.isLogged;
         
-        alert(res.data.msg)
-        
         const storage = JSON.stringify(user)
-
+        
         localStorage.setItem('activeUser', storage)
+        
+        await swal(`Welcome back ${u.user_profile}`, "You have logged in successfully", "success");
 
         await router.push('/profile')
         
-        // window.location.reload()
+        window.location.reload()
 
       } catch (error) {
+
         console.error('error has occurred')
+
       }
      },
      async logoutUser(){
+
+      const res = await axios.delete(`https://w-store-api.onrender.com/logout`)
 
       $cookies.remove('jwt')
 
@@ -107,6 +114,8 @@ export default createStore({
       $cookies.remove('userId')
 
       localStorage.removeItem('activeUser')
+
+      await swal(`You have ${res.data.msg}`, "Goodbye! come shop soon", "success");
 
       await router.push('/')
 
