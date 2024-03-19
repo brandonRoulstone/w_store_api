@@ -17,10 +17,8 @@
                     <router-link class="nav-link" to="/profile" v-if="$cookies.get('jwt')">profile</router-link>
                     <router-link class="nav-link" to="/login">login</router-link>
                     <router-link class="nav-link" id="cartXYZ" to="/cart" v-if="$cookies.get('jwt')"><i class="fa-solid fa-cart-shopping fa-lg" style="color: #0497c9;"></i> <span>{{$store.state.cart.length}}</span></router-link>
+                    <button v-if="$cookies.get('jwt')" @click="logOut()" class="btn bg-black"><i class="fa-solid fa-arrow-right-from-bracket fa-sm" style="color: #ffffff;"></i></button>
                   </div>
-                </div>
-                <div>
-                  <button v-if="$cookies.get('jwt')" @click="logOut()" id="btn"><i class="fa-solid fa-arrow-right-from-bracket fa-sm" style="color: #ffffff;"></i></button>
                 </div>
             </div>
           </nav>

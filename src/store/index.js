@@ -180,7 +180,7 @@ export default createStore({
 
       // const prodTarg = res.data.product;
 
-      // context.commit('addProd', prodTarg)
+      context.commit('addProd', res.data)
 
       // $cookies.set('cart', prodTarg)
 
@@ -198,7 +198,7 @@ export default createStore({
 
         const res = axios.delete(`https://w-store-api.onrender.com/cart/${TargProd}`);
 
-        localStorage.removeItem('cartKey');
+        // localStorage.removeItem('cartKey');
 
       }
 
