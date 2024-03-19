@@ -27,11 +27,6 @@
                     <input type="text" class="form-control" id="floatingImgInput" placeholder="image" v-model="user_image">
                     <label for="floatingImgInput">image</label>
                   </div>
-                  <!-- <div class="checkbox mb-3">
-                    <label>
-                      <input type="checkbox" value="user_deets" v-model="user_role" required> Accept T's&c's
-                    </label>
-                  </div> -->
                   <div class="d-flex gap-1 mt-2">
                     <button class="w-100 btn btn-lg btn-dark" type="submit" v-if="this.user_profile.length === 0 || this.user_email.length === 0 || this.user_password.length === 0 || this.user_password.length < 5 || this.user_image.length === 0" disabled>Fill in your details</button>
                     <button @click="signUser()" class="w-100 btn btn-lg btn-primary" v-else>Sign up <i class="fa-regular fa-user fa-bounce fa-lg" style="color: #000000;"></i></button>
