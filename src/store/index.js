@@ -199,7 +199,8 @@ export default createStore({
 
         const res = await axios.get(`https://w-store-api.onrender.com/cart/${$cookies.get('userId')}`);
 
-        context.commit('accessCart', res.data);
+        // context.commit('accessCart', res.data);
+        $cookies.set('cart', res.data)
 
         console.log(res.data)
       }

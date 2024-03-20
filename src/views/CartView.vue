@@ -1,8 +1,8 @@
 <template>
     <div class="mt-5 pt-5">
 
-        <div v-for="cart in getCart()" v-bind:key="cart.prodID">
-            <img :src="cart.prodUrl" height="400" width="400"/>
+        <div v-for="cart in $store.state.cart" v-bind:key="cart.prodID">
+            <img :src="cart.prodUrl" height="400"/>
             <div>R{{ cart.product_price }}</div>
             <div>Total price: {{ cart.total_price }}</div>
             <div>Name: {{ cart.prodName }}</div>
@@ -29,7 +29,7 @@ export default {
         }
     },
     mouted(){
-        this.getCart($cookies.get('userId'));
+        // this.getCart();
     }
 }
 </script>
