@@ -201,8 +201,6 @@ export default createStore({
 
         context.commit('accessCart', res.data);
 
-        $cookies.set('cart', res.data)
-
         console.log(res.data)
       }
 
