@@ -5,14 +5,17 @@ export default {
         res.send(await getCart())
     },
     itemsInCart: async (req, res) => {
-        res.send(await addedInCart(+req.params.id))
+        let data = await addedInCart(+req.params.id)
+        res.send({
+            products : data
+        })
     },
     addToCartTable : async (req, res) => {
         let { quantity } = req.body
         const [product] = await getProductByID(+req.params.id);
         let { user_id } = req.query
         await insert(+req.params.id, user_id, quantity)
-        res.send(await getCart());
+        res.send(await addedInCart(+req.params.id));
     },
     deleteFromCart : async (req, res) => {
         await removeFromCart(+req.params.id)
