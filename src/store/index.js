@@ -150,6 +150,7 @@ export default createStore({
       },
      async deleteUser(context, user_id){
       const res = await axios.delete(`https://w-store-api.onrender.com/users/${user_id}`)
+      
       window.location.reload()
      },
      async updateUser(context, update){
@@ -186,7 +187,9 @@ export default createStore({
      },
       async removeFromCart(context, TargProd){
 
-        const res = axios.delete(`https://w-store-api.onrender.com/cart/${TargProd}`);
+        const res = axios.delete(`https://w-store-api.onrender.com/cart/${TargProd}?user_id=${$cookies.get('userId')}`);
+
+        console.log(TargProd, `https://w-store-api.onrender.com/cart/${TargProd}?user_id=${$cookies.get('userId')}`)
 
         window.location.reload();
 
