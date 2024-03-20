@@ -198,8 +198,6 @@ export default createStore({
         let allData = res.data.products;
 
         context.commit('addProd', allData);
-
-        console.log(res.data)
       }
 
   },
