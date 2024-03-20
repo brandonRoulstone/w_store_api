@@ -178,28 +178,28 @@ export default createStore({
 
       const res = await axios.post(`https://w-store-api.onrender.com/cart/${userValidity}?user_id=${$cookies.get('userId')}`,userValidity);
 
-      // const prodTarg = res.data.product;
+      console.log(`https://w-store-api.onrender.com/cart/${$cookies.get('userId')}`)
 
-      context.commit('addProd', res.data)
-
-      // $cookies.set('cart', prodTarg)
-
-      // console.log(prodTarg);
+      // context.commit('accessCart', res.data)
 
      },
      async getCart(context){
 
       const res = await axios.get(`https://w-store-api.onrender.com/cart`);
-
-      context.commit('accessCart', res.data)
       
      },
       async removeFromCart(context, TargProd){
 
         const res = axios.delete(`https://w-store-api.onrender.com/cart/${TargProd}`);
 
-        // localStorage.removeItem('cartKey');
+      },
+      async userCart(context){
 
+        const res = await axios.get(`https://w-store-api.onrender.com/cart/${$cookies.get('userId')}`);
+
+        context.commit('accessCart', res.data);
+
+        console.log(res.data)
       }
 
   },
