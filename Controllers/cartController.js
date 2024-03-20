@@ -10,16 +10,12 @@ export default {
     addToCartTable : async (req, res) => {
         let { quantity } = req.body
         const [product] = await getProductByID(+req.params.id);
-        const [cart] = await getCart();
         let { user_id } = req.query
         await insert(+req.params.id, user_id, quantity)
-        res.send({
-            product : product,
-            cart : cart
-        });
+        res.send(await getCart());
     },
     deleteFromCart : async (req, res) => {
         await removeFromCart(+req.params.id)
         res.send(await getCart())
-    }
+    } 
 } 
