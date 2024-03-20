@@ -102,10 +102,38 @@ const insert = async(product_id, user_id) => {
     await addToCart(product_id, user_id);
 }
 
-const removeFromCart = async (product_id) => {
-    const [inCart] = await pool.query(`
-    DELETE FROM cart WHERE product_id = ? 
-    `, [product_id]);
+// const removeFromCart = async (user_id) => {
+//     const [inCart] = await pool.query(`
+//     DELETE FROM cart WHERE user_id = ? 
+//     `, [user_id]);
+// }
+
+const removeFromCart = async (product_id, user_id) => {
+    // Check if the product is already in the cart
+    const [existingProduct] = await pool.query(`
+        SELECT * FROM cart
+        WHERE product_id = ? AND user_id = ?
+    `, [product_id, user_id]);
+
+    if (existingProduct.length > 0) {
+        // Decrease the quantity of the existing product in the cart
+        const updatedQuantity = existingProduct[0].quantity - 1;
+
+        if (updatedQuantity <= 0) {
+            // If the updated quantity is less than or equal to zero, remove the product from the cart
+            await pool.query(`
+                DELETE FROM cart
+                WHERE product_id = ? AND user_id = ?
+            `, [product_id, user_id]);
+        } else {
+            // Update the quantity of the existing product in the cart
+            await pool.query(`
+                UPDATE cart
+                SET quantity = ?
+                WHERE product_id = ? AND user_id = ?
+            `, [updatedQuantity, product_id, user_id]);
+        }
+    }
 }
 
 

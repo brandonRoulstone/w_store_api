@@ -18,7 +18,8 @@ export default {
         res.send(await addedInCart(+req.params.id));
     },
     deleteFromCart : async (req, res) => {
-        await removeFromCart(+req.params.id)
+        let { user_id } = req.query
+        await removeFromCart(+req.params.id, user_id)
         res.send(await getCart())
     } 
 } 
