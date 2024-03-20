@@ -48,6 +48,26 @@ const getCart = async () => {
     return cart
 }
 
+const addedInCart = async (user_id) => {
+    const [cartItems] = await pool.query(`
+        SELECT 
+            cart.quantity,
+            products.product_price,
+            (cart.quantity * products.product_price) AS total_price,
+            products.product_img AS prodUrl,
+            products.product_name AS prodName,
+            products.product_id AS prodID
+        FROM 
+            cart
+        JOIN 
+            products ON cart.product_id = products.product_id
+        WHERE 
+            cart.user_id = ?
+    `, [user_id]);
+    
+    return cartItems;
+}
+
 const addToCart = async (product_id, user_id) => {
     // Check if the product is already in the cart
     const [existingProduct] = await pool.query(`
@@ -153,7 +173,7 @@ const checkProfile = async (user_email) => {
 }
   
  
-export {getProducts, getProductByID, editProduct, deleteProduct, addProduct, getCart, insert, addToCart, removeFromCart, checkUser, getUsers, addUser, deleteUser, getUserByID, checkRoleStatus, editUser, checkProfile}
+export {getProducts, getProductByID, editProduct, deleteProduct, addProduct, getCart, addedInCart, insert, addToCart, removeFromCart, checkUser, getUsers, addUser, deleteUser, getUserByID, checkRoleStatus, editUser, checkProfile}
 
 
 

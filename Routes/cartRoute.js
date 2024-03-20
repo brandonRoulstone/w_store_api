@@ -9,6 +9,7 @@ router.route('/')
 
 
 router.route('/:id')
+    .get(controller.itemsInCart)
     .post(controller.addToCartTable)
     .delete(controller.deleteFromCart)
 

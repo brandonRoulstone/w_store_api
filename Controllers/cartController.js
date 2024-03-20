@@ -1,8 +1,11 @@
-import { getCart, addToCart, insert, removeFromCart, getProductByID } from "../Model/db.js";
+import { getCart, addToCart, insert, removeFromCart, getProductByID, addedInCart } from "../Model/db.js";
 
 export default {
     allCartItems : async (req, res) => {
         res.send(await getCart())
+    },
+    itemsInCart: async (req, res) => {
+        res.send(await addedInCart(+req.params.id))
     },
     addToCartTable : async (req, res) => {
         let { quantity } = req.body
