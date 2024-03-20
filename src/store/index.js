@@ -11,7 +11,6 @@ export default createStore({
     users: [],
     user: [],
     loggedUser: [],
-    cart: [],
     cartState: []
   },
   getters: {
@@ -31,9 +30,6 @@ export default createStore({
     },
     accessUserIsLogged(state, payload){
       state.loggedUser = payload
-    },
-    accessCart(state, payload){
-      state.cart = payload
     },
     addProd(state, payload){
       state.cartState = payload
@@ -180,7 +176,7 @@ export default createStore({
 
       console.log(`https://w-store-api.onrender.com/cart/${$cookies.get('userId')}`)
 
-      context.commit('accessCart', res.data)
+      context.commit('addProd', res.data)
 
      },
      async getCart(context){
@@ -199,8 +195,9 @@ export default createStore({
 
         const res = await axios.get(`https://w-store-api.onrender.com/cart/${$cookies.get('userId')}`);
 
-        // context.commit('accessCart', res.data);
-        $cookies.set('cart', res.data)
+        let allData = res.data.products;
+
+        context.commit('addProd', allData);
 
         console.log(res.data)
       }
