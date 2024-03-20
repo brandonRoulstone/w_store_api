@@ -67,7 +67,6 @@ const addedInCart = async (user_id) => {
     
     return cartItems;
 }
-// console.log(await addedInCart(3))
 
 const addToCart = async (product_id, user_id) => {
     // Check if the product is already in the cart

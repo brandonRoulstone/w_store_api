@@ -6,10 +6,10 @@ const router = express.Router()
 
 router.route('/')
     .get(controller.allCartItems)
+    
+    
+    router.route('/:id')
     .get(controller.itemsInCart)
-
-
-router.route('/:id')
     .post(controller.addToCartTable)
     .delete(controller.deleteFromCart)
 
