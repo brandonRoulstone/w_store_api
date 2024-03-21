@@ -5,12 +5,6 @@
         <div class="mt-5 pt-5 px-2 w-100 container" id="searchBar">
 
             <input type="search" class="form-control form-control-dark mx-3 w-50" placeholder="Search..." aria-label="Search" v-model="search" @change="searchByName()">
-
-            <!-- <div class="d-flex justify-content-center" v-for="user in $cookies.get()" v-bind:key="user">
-                <a href="/profile" class="badge d-flex align-items-center p-1 pe-2 text-primary-emphasis bg-primary-subtle border border-primary-subtle rounded-pill text-decoration-none">
-                    <img class="rounded-circle me-1" width="24" height="24" src="https://github.com/mdo.png" alt="">Primary
-                  </a>
-            </div> -->
             <button @click="sortBy()" id="sortBy" class="mx-2">sort by price</button>
             <button  id="sortBy">Filter <i class="fa-solid fa-filter fa-lg" style="color: #000000;"></i></button>
 

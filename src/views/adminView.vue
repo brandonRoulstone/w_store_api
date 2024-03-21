@@ -169,9 +169,10 @@
 </div>
 
 
-<div id="" class="mt-5 pt-5 container" v-else>
+<div id="FourOFour" class="mt-5 pt-5 container" v-else>
 
   <h1>This page does not Exist</h1>
+  <small>Server responded with a 404</small>
 
 </div>
 
@@ -341,6 +342,15 @@ export default {
 
 #card{
   display: flex !important;
+}
+
+#FourOFour{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    flex-direction: column;
 }
 
 #userImg{
