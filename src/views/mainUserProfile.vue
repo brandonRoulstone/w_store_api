@@ -2,7 +2,7 @@
 
     <div class="" id="boxLg">
         <div id="box" class="mt-5 pt-5">
-            <div v-for="user in userIsLogged()" v-bind:key="user" id="user">
+            <div v-for="user in userIsLogged()" v-bind:key="user" id="user" class="mx-5 px-3">
                 <div class="card mx-2 shadow" style="width: 42.4rem;">
                     <p class="card-text small text-start mx-2 my-1"><i class="fa-regular fa-circle-user fa-lg" style="color: #04ff00;"></i> Active</p>
                     <img :src="user.user_image" class="card-img-top pt-2" id="objectImg" :alt="user.user_profile">

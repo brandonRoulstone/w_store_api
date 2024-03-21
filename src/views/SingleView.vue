@@ -1,13 +1,13 @@
 <template lang="">
     <div id="cardBody">
         <div v-for="product of $store.state.product" v-bind:key="product.product_id">
-            <div id="isoParent" class="container-fluid">
-                <div id="isolatedDivOne">
-                     <img :src="product.product_img" :alt="product.product_name" class="img" id="imgProd"/>
+            <div id="isoParent" class="container">
+                <div id="isolatedDivOne" class="d-flex justify-content-center">
+                     <img :src="product.product_img" :alt="product.product_name" class="img img-fluid" id="imgProd"/>
                 </div>
                 <div id="isolatedDivTwo" class="my-5 py-5">
                     <h1 class="fw-bold">{{ product.product_name }}</h1>
-                    <h3 class="fw-normal">{{ product.product_desc }}</h3>
+                    <div class="container fw-normal">{{ product.product_desc }}</div>
                     <div id="stars">
                         <div class="rating">
                             <input value="5" name="rate" id="star5" type="radio">
@@ -22,8 +22,8 @@
                             <label title="text" for="star1"></label>
                           </div>
                     </div>
+                    <h3 class="text-end mx-2 px-1 text-decoration-underline">Price: R{{ product.product_price }}</h3>
                     <hr class="my-3 mx-3"/>
-                    <h3>R{{ product.product_price }}</h3>
                     
                     
                     <addToCartBtn @click="addToCart(product.product_id)"/>
@@ -98,10 +98,22 @@ export default {
   
 @media (max-width: 790px) {
     #isoParent{
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+    }
 }
+@media (max-width: 550px) {
+    #imgProd{
+        height: 300px;
+        padding-top: 50px;
+    }
+}
+@media (max-width: 325px) {
+    #imgProd{
+        height: 200px;
+        padding-top: 50px;
+    }
 }
     
 </style>

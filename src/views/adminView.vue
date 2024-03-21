@@ -1,12 +1,9 @@
 <template>
 
 <div class="p-5 mt-5" v-if="$cookies.get('role') === 'admin'">
-    
-  <h1>Manage products in store</h1>
-
-  <button @click="console.log($cookies.get('role') === 'admin')">
-   click
-  </button>
+  <div class="d-flex justify-content-start">
+    <input type="search" class="form-control form-control-dark w-50 mb-2" placeholder="Search..." aria-label="Search" v-model="search" @change="searchByName()">
+  </div>
 
   <div id="products" class="gap-4">
     <div v-for="product in $store.state.products" v-bind:key="product.product_id">
@@ -203,7 +200,10 @@ export default {
             product_desc : '',
             product_price : '',
             product_img: '',
-            product_category : ''
+            product_category : '',
+
+
+            search : ''
         }
     },
 
@@ -273,7 +273,15 @@ export default {
         },
         deleteProduct(product_id){
           this.$store.dispatch('deleteProduct', product_id)
-        }
+        },
+        searchByName(){
+            let storageArr = this.$store.state.products;
+            let inputX = this.search;
+            let resultY = storageArr.filter(prod => {
+                return prod.product_name.toLowerCase().includes(inputX.toLowerCase())
+            });
+            return resultY;
+        },
     },
     mounted(){
       this.getUsers();

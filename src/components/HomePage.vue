@@ -67,7 +67,6 @@
 import ButtonCompVue from './ButtonComp.vue';
 import dividerCompVue from './dividerComp.vue';
 import textRenderVue from './textRender.vue';
-// import dividerCompVue
 export default {
   props: {
     msg: String
@@ -80,7 +79,7 @@ export default {
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
+
 <style scoped>
 
 #landing{

@@ -8,7 +8,6 @@
         <div class="mt-3" id="boxXD">
     
           <h1>Add a product</h1>
-     <!-- product_name, product_desc, product_price, prooduct_img, product_category -->
           <div class="input-group flex-nowrap mb-2">
             <span class="input-group-text" id="addon-wrapping" v-if="product_name.length === 0"><i class="fa-solid fa-tags fa-xl" style="color: #ff0000;"></i></span>
             <span class="input-group-text" id="addon-wrapping" v-else><i class="fa-solid fa-tags fa-xl" style="color: #11ff00;"></i></span>
