@@ -22,7 +22,7 @@
                             <label title="text" for="star1"></label>
                           </div>
                     </div>
-                    <h3 class="text-end mx-2 px-1 text-decoration-underline">Price: R{{ product.product_price }}</h3>
+                    <h3 class="text-center mx-2 px-1 text-decoration-underline">Price: R{{ product.product_price }}</h3>
                     <hr class="my-3 mx-3"/>
                     
                     

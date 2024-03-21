@@ -4,16 +4,25 @@
 
         <div class="mt-5 pt-5 px-2 w-100 container" id="searchBar">
 
-            <input type="search" class="form-control form-control-dark mx-3 w-50" placeholder="Search..." aria-label="Search" v-model="search" @change="searchByName()">
-            <button @click="sortBy()" id="sortBy" class="mx-2">sort by price</button>
-            <button  id="sortBy">Filter <i class="fa-solid fa-filter fa-lg" style="color: #000000;"></i></button>
+            <input type="search" class="form-control form-control-dark mx-3 w-50" placeholder="Search by categoies or product names" aria-label="Search" v-model="search" @change="searchByName()">
+            <!-- <button @click="sortBy()" id="sortBy" class="mx-2">sort by price</button> -->
+            <!-- <button @click="sortByPcs()" id="sortBy" class="mx-2">Gaming Desktop PC</button> -->
+            <div class="dropdown">
+                <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="fa-solid fa-filter fa-lg" style="color: #000000;"></i> Filter
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" @click="sortBy()">Low to high</a></li>
+                    <li><a class="dropdown-item" @click="HightToLow()">High to low</a></li>
+                </ul>
+            </div>
 
 
         </div>
     
         <div class="mt-2 pt-5 px-2 container" id="cardBox">
 
-            <div class="card m-1" style="width: 18rem;" v-for='product in searchByName() || sortBy()' v-bind:key='product.product_id'>
+            <div class="card m-1" style="width: 18rem;" v-for='product in searchByName() || sortBy() || HightToLow()' v-bind:key='product.product_id'>
 
                 <img :src="product.product_img" class="card-img-top" :alt="product.product_name" loading="lazy" id="productImg">
 
@@ -23,9 +32,14 @@
     
                       <h5>{{product.product_name}}</h5>
     
-                  </div>
+                    </div>
 
-                  <p class="card-text">R {{product.product_price}}</p>
+                    <p class="card-text">R {{product.product_price}}</p>
+                    
+                    <p class="card-text">
+                      category :
+                      {{product.product_category}}
+                    </p>
 
                   <router-link @click="fetchProduct(product.product_id)" :to="{ name: 'product', params: { productId: product.product_id }} " class="btn btn-dark"  v-if="$cookies.get('jwt')">details <i class="fa-regular fa-eye fa-sm" style="color: #ffffff;"></i></router-link>
 
@@ -54,7 +68,7 @@ export default {
             let storageArr = this.$store.state.products;
             let inputX = this.search;
             let resultY = storageArr.filter(prod => {
-                return prod.product_name.toLowerCase().includes(inputX.toLowerCase())
+                return prod.product_name.toLowerCase().includes(inputX.toLowerCase()) || prod.product_category.toLowerCase().includes(inputX.toLowerCase()) 
             });
             return resultY;
         },
@@ -70,7 +84,29 @@ export default {
         },
         isLogged(){
             this.$store.dispatch('')
+        },
+        HightToLow(){
+            let products = this.$store.state.products;
+
+            if (products) {
+                products.sort((a, b) => b.product_price - a.product_price );
+            }
+
         }
+        // sortByPcs() {
+        //     if (!this.$store.state.products || !Array.isArray(this.$store.state.products)) {
+        //         console.error("Products array is missing or not valid.");
+        //         return [];
+        //     }
+
+        //     let storageArr = this.$store.state.products;
+        //     let resultY = storageArr.filter(prod => {
+        //         return prod.product_category === 'Gaming pc';
+        //     });
+        //     console.log(resultY);
+
+        //     return resultY;
+        // },
     },
      mounted(){
         this.fetchProducts(),
@@ -103,6 +139,12 @@ export default {
         max-height: 45px;
     }
 
+    @media (max-width: 990px) {
+        #cardBox{
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
     @media (max-width: 580px) {
         #cardBox{
             display: grid;

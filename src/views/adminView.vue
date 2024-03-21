@@ -1,9 +1,9 @@
 <template>
 
 <div class="p-5 mt-5" v-if="$cookies.get('role') === 'admin'">
-  <div class="d-flex justify-content-start">
+  <!-- <div class="d-flex justify-content-start">
     <input type="search" class="form-control form-control-dark w-50 mb-2" placeholder="Search..." aria-label="Search" v-model="search" @change="searchByName()">
-  </div>
+  </div> -->
 
   <div id="products" class="gap-4">
     <div v-for="product in $store.state.products" v-bind:key="product.product_id">

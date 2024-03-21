@@ -6,9 +6,9 @@
         </div>
         <div class="d-flex justify-content-center gap-1 container">
 
-            <button @click="sortBy()" id="sortBy" class="mx-2 btn bg-black text-white"><i class="fa-solid fa-arrow-down-up-across-line fa-lg" style="color: #ffffff;"></i> Sort</button>
+            <button @click="sortBy()" id="sortBy" class="btn bg-black text-white"><i class="fa-solid fa-arrow-down-up-across-line fa-lg" style="color: #ffffff;"></i> Sort</button>
             
-            <router-link to="/products" class="btn bg-black text-white"><i class="fa-solid fa-basket-shopping fa-lg" style="color: #ffffff;"></i> Continue shopping</router-link>
+            <router-link to="/products" class="btn bg-black text-white" id="router"><i class="fa-solid fa-basket-shopping fa-lg" style="color: #ffffff;"></i> Continue shopping</router-link>
             <button type="button" class="btn bg-black text-white" data-bs-toggle="modal" data-bs-target="#exampleModal">
                 <i class="fa-regular fa-user fa-lg" style="color: #ffffff;"></i> Your profile
             </button>
@@ -57,7 +57,7 @@
                     <div id="prodPrice"><span>Price:</span> R{{ cart.product_price }}</div>
                 </div>
                 <div class="py-2 my-3 px-4 d-flex gap-2 border-top">
-                    <button @click="addToFavs(cart)" class="btn bg-white shadow border text-white" :title="'add ' + cart.prodName + ' to favourites'"><i class="fa-regular fa-heart fa-lg" style="color: #ff0000;"></i></button>
+                    <button @click="addToFavs(cart)" class="btn bg-white shadow border text-white" :title="'add ' + cart.prodName + ' to favourites'"><i class="fa-regular fa-heart fa-lg fa-beat" style="color: #ff0000;"></i></button>
                     <button @click="deleteFromCart(cart.prodID)"  class="btn bg-black text-white w-100">Delete</button>
                 </div>
             </div>
@@ -95,13 +95,15 @@ export default {
         deleteFromCart(product_id){
             this.$store.dispatch('removeFromCart', product_id)
         },
-        addToFavs(favz){
+        async addToFavs(favz){
             let storage = this.Userfavourites
             const fvs = storage.push(favz)
             console.log(fvs);
             console.log(storage);
             const data = JSON.stringify(storage)
+            await swal(`You just liked a product`, `The product you liked has been saved`, "success");
             localStorage.setItem('favs', data)
+            window.location.reload()
         },
         getfavs(){
             let favs = JSON.parse(localStorage.getItem("favs")) || [];
@@ -183,6 +185,24 @@ export default {
         justify-content: center;
         flex-wrap: wrap;
         border: none;
+    }
+}
+@media (max-width: 558px) {
+    #router,div, button, i{
+        font-size: 12px !important;
+    }
+}
+@media (max-width: 358px) {
+    #router,div, button, i{
+        font-size: 10px !important;
+    }
+}
+@media (max-width: 301px) {
+    #router,div, button{
+        font-size: 8px !important;
+    }
+    i{
+        font-size: 10px !important;
     }
 }
     
