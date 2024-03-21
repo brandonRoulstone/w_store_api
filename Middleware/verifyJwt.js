@@ -8,37 +8,49 @@ const auth = async (req, res, next) => {
     // setting the refresh token in an object
     const refreshTokens = {}
     
-    // checks if there's a cookie and then splits it
     let tokenInHeader = cookie && cookie.split('=')[1];
     
     if (tokenInHeader === undefined) {
+
         return res.status(401).send({ msg: "No valid token" });
+        
     }
 
     jwt.verify(tokenInHeader, process.env.SECRET_KEY, (err, user) => {
+
         if (err) {
+
             if (err.name === 'TokenExpiredError') {
+
                 // reset the token in the header   
                 const refreshToken = req.headers['REFRESH_TOKEN'];
 
                 // if the refresh token exists or...
                 // if the refresh exists at the index
                 if (refreshToken && refreshTokens[refreshToken]) {
+
                     jwt.verify(refreshToken, process.env.REFRESH_TOKEN, (err, decoded) => {
+
                         if (err) {
-                            console.log('in the first if statement') 
-                            return res.status(403).json({ error: 'Invalid Token 1' });
+
+                            return res.status(403).json({ error: 'Invalid Token' });
+
                         } else {
-                            // Assigns a new token to the user once the 
+                            
                             const newToken = jwt.sign({ user_email: decoded.user_email }, process.env.REFRESH_TOKEN, { expiresIn: '1d' });
+
                             res.setHeader('Authorization', newToken);
+                            
                             next();
+
                         }
                     });
+
                 }
             } else {
-                console.log('after the if statement')
-                return res.status(403).json({ error: 'Invalid Token 2' });
+
+                return res.status(403).json({ error: 'Invalid Token' });
+
             }
         }
         req.user_email = user;

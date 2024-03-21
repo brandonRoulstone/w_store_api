@@ -13,6 +13,13 @@ const getProductByID = async (id) => {
     const [product] = await pool.query(`
         SELECT * FROM products WHERE product_id = ?
     `, [id]);
+
+    if(!id || isNaN(id) || id > product){
+
+        throw error()
+
+    }
+
     return product;
 }
 
@@ -28,6 +35,11 @@ const deleteProduct = async(id) => {
     const [product] = await pool.query(`
     DELETE FROM products WHERE product_id =?
     `, [id]);
+    if(!id || isNaN(id) || id > product){
+
+        throw error()
+
+    }
 }
 
 const addProduct = async (product_name, product_desc, product_price, product_img, product_category) => {
@@ -102,12 +114,6 @@ const insert = async(product_id, user_id) => {
     await addToCart(product_id, user_id);
 }
 
-// const removeFromCart = async (user_id) => {
-//     const [inCart] = await pool.query(`
-//     DELETE FROM cart WHERE user_id = ? 
-//     `, [user_id]);
-// }
-
 const removeFromCart = async (product_id, user_id) => {
     // Check if the product is already in the cart
     const [existingProduct] = await pool.query(`
@@ -150,10 +156,10 @@ const checkUser = async (user_email, user_role) => {
 // user settings
 
 const getUsers = async () => {
- const [users] = await pool.query(`
-    SELECT * FROM users
- `);
- return users;
+    const [users] = await pool.query(`
+        SELECT * FROM users
+    `);
+    return users;
 }
 
 const addUser = async (user_profile, user_email, user_password, user_role, user_image) => {
@@ -168,6 +174,13 @@ const getUserByID =  async (user_id) => {
     const [user] = await pool.query(`
         SELECT * FROM users WHERE user_id = ?
     `,[user_id]);
+
+    if(!user_id || isNaN(user_id) || user_id > user){
+
+        throw error()
+
+    }
+
     return user
 }
 
@@ -175,7 +188,13 @@ const getUserByID =  async (user_id) => {
 const editUser = async (user_profile, user_email, user_password, user_role, user_image, user_id) =>{
     const [users] = await pool.query(`
     UPDATE users SET user_profile = ?, user_email = ?, user_password = ?, user_role = ?, user_image = ? WHERE user_id = ?
-    `, [user_profile, user_email, user_password, user_role, user_image, user_id])
+    `, [user_profile, user_email, user_password, user_role, user_image, user_id]);
+
+    if(!user_id || isNaN(user_id) || user_id > users){
+
+        throw error()
+
+    }
 }
 
    
@@ -183,6 +202,12 @@ const deleteUser = async (user_id) => {
     const [users] = await pool.query(`
         DELETE FROM users WHERE user_id = ?
     `,[user_id])
+
+    if(!user_id || isNaN(user_id) || user_id > users){
+
+        throw error()
+
+    }
 }
 
 // admin check

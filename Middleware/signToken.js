@@ -27,8 +27,7 @@ const authenticate = async (req, res, next) => {
     
                 res.cookie('jwt', token, {httpOnly: false, expiresIn: '1h'});
                 res.cookie('refreshToken', refreshToken, { httpOnly: false, expiresIn: '1d' });
-                
-                // console.log(token)
+
                 res.send({
                     token: token,
                     refreshToken: refreshToken,

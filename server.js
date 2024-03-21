@@ -28,7 +28,7 @@ app.post('/login', authenticate, (req, res) => {
 app.delete('/logout', (req, res) => {
     res.clearCookie('jwt')
     res.json({
-        msg : 'logged out succesfuly'
+        msg : 'logged out successfully'
     });
 });
 
