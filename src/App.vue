@@ -1,14 +1,22 @@
 <template>
   <NavbarcompVue />
+  <LoaderCompVue />
   <router-view/>
+  <div class="d-flex justify-content-center">
+    <FooterCompVue />
+  </div>
 </template>
 
 
 <script>
+import FooterCompVue from './components/FooterComp.vue';
+import LoaderCompVue from './components/LoaderComp.vue';
 import NavbarcompVue from './components/Navbarcomp.vue';
 export default {
   components : {
-    NavbarcompVue
+    NavbarcompVue,
+    FooterCompVue,
+    LoaderCompVue
   }
 }
 </script>

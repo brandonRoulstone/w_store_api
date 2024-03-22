@@ -1,17 +1,35 @@
 <template>
 
-    <div class="" id="boxLg">
+    <div class="mb-4" id="boxLg">
         <div id="box" class="mt-5 pt-5">
-            <div v-for="user in userIsLogged()" v-bind:key="user" id="user" class="mx-5 px-3">
-                <div class="card mx-2 shadow" style="width: 42.4rem;">
-                    <p class="card-text small text-start mx-2 my-1"><i class="fa-regular fa-circle-user fa-lg" style="color: #04ff00;"></i> Active</p>
+            <div v-for="user in userIsLogged()" v-bind:key="user" id="user" class="px-3">
+                <div class="card mx-2 shadow" style="width: 42.4rem;" id="container">
+                    <div class="d-flex">
+                        <p id="XYX" class="card-text small mx-2 my-1"><i class="fa-regular fa-circle-user fa-lg" style="color: #04ff00;"></i> Active</p>
+                    </div>
+
                     <img :src="user.user_image" class="card-img-top pt-2" id="objectImg" :alt="user.user_profile">
                     <div class="card-body">
                         <h5 class="card-title fs-4">{{ user.user_profile }}</h5>
                         <p class="card-text fs-4">{{ user.user_email }}</p>
-                        <div class="d-flex gap-2 justify-content-center">
-                            <button class="btn btn-dark" id="button">Edit profile</button>
-                            <router-link to="/products" class="btn btn-dark" id="button">My shop</router-link>
+                    </div>
+                    <div class="container">
+                        <div class="input-group flex-nowrap mb-2">
+                            <span class="input-group-text" id="addon-wrapping">Username</span>
+                            <input type="text" class="form-control" placeholder="user_name" aria-label="Username" aria-describedby="addon-wrapping" v-model="user_profile">
+                          </div>
+                          <div class="input-group flex-nowrap mb-2">
+                             <span class="input-group-text" id="addon-wrapping">Profile img</span>
+                             <input type="text" class="form-control" placeholder="user_image" aria-label="Username" aria-describedby="addon-wrapping" v-model="user_image">
+                          </div>
+                          <div class="input-group flex-nowrap mb-2">
+                            <span class="input-group-text" id="addon-wrapping">Email add</span>
+                            <input type="text" class="form-control" placeholder="user_email" aria-label="Email" aria-describedby="addon-wrapping" v-model="user.user_email" readonly>
+                          </div>
+                          <div class="d-flex gap-2 justify-content-center my-2 col-lg-6 mx-auto">
+                            <router-link to="/products" class="btn" id="button">My shop</router-link>
+                            <button type="button" class="btn btn-primary" id="button" @click="updateUser(user.user_id)">Save my changes</button>
+                            <router-link to="/admin" class="btn" id="button" v-if="$cookies.get('role') === 'admin'">Manage website</router-link>
                         </div>
                     </div>
                 </div>
@@ -20,11 +38,10 @@
         <div id="square">
             <div class="mt-5 pt-5">
 
-                <div id="userActivity" class="mx-5">
+                <div id="userActivity" class="">
                     <div class="card mx-5 shadow" id="media">
                         <h5 class="card-header text-start">Subscriptions</h5>
                         <div class="card-body">
-                            <!-- <div class="card-title">Special title treatment</div> -->
                             <p class="card-text text-start"><i class="fa-solid fa-truck-fast fa-lg mx-2" style="color: #FFD43B;"></i> Super Shipping</p>
                             <p class="card-text text-start"><i class="fa-regular fa-star fa-lg mx-2" style="color: #FFD43B;"></i> Premium client</p>
                             <p class="card-text text-start"><i class="fa-solid fa-w fa-lg mx-2" style="color: #B197FC;"></i> W-store ULTRA</p>
@@ -64,6 +81,16 @@
 </template>
 <script>
 export default {
+    data(){
+        return {
+            user_id : $cookies.get('userId'),
+            user_profile : '',
+            user_email : '',
+            user_password : '',
+            user_role : '',
+            user_image : '',
+        }
+    },
     methods : {
         userIsLogged(){
             let users = JSON.parse(localStorage.getItem("activeUser")) || [];
@@ -71,7 +98,18 @@ export default {
         },
         getCart(){
             this.$store.dispatch('userCart');
-        }
+        },
+        updateUser(user_id){
+          let userObjX = {
+            user_id : this.user_id,
+            user_profile : this.user_profile,
+            user_email : this.user_email,
+            user_password : this.user_password,
+            user_role : this.user_role,
+            user_image : this.user_image
+          }
+          this.$store.dispatch('updateUser', userObjX);
+        },
     },
     mounted() {
         this.userIsLogged();
@@ -149,6 +187,10 @@ export default {
         height: 300px;
     }
 
+    #XYX{
+        cursor: pointer;
+    }
+
     #button {
         width: fit-content;
         display: flex;
@@ -182,7 +224,7 @@ export default {
         transition: .3s ease;
     }
 
-    @media (max-width: 990px) {
+    @media (max-width: 1028px) {
         #boxLg{
             display: flex;
             flex-direction: column;
@@ -190,10 +232,40 @@ export default {
 
         #userActivity{
             min-width: 100% !important;
-            /* flex-direction: row !important; */
+        }
+        #media{
+            width: 920px;
+        }
+    }
+    @media (max-width: 990px) {
+        #boxLg{
+            display: flex;
+            flex-direction: column;
+        }
+
+        #userActivity{
+            width: 100% !important;
         }
         #media{
             width: 620px;
+        }
+    }
+    @media (max-width: 525px) {
+        #boxLg{
+            display: flex;
+            flex-direction: column;
+            justify-content: center !important;
+        }
+
+        #container{
+            width: 100% !important;
+        }
+
+        #userActivity{
+            width: 100% !important;
+        }
+        #media{
+            width: 250px;
         }
     }
 </style>

@@ -314,7 +314,7 @@ export default createStore({
   
         context.commit('addProd', res.data)
 
-        await swal(`Unable to get products from cart`, `You have items in your cart now`, "success");
+        await swal(`Successfully added to cart`, `You have items in your cart now`, "success");
 
       } catch (error) {
 

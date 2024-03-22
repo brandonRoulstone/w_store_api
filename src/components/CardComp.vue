@@ -22,7 +22,7 @@
     
         <div class="mt-2 pt-5 px-2 container" id="cardBox">
 
-            <div class="card m-1" style="width: 18rem;" v-for='product in searchByName() || sortBy() || HightToLow()' v-bind:key='product.product_id'>
+            <div class="card m-1" id="cardBody" style="width: 18rem;" v-for='product in searchByName() || sortBy() || HightToLow()' v-bind:key='product.product_id'>
 
                 <img :src="product.product_img" class="card-img-top" :alt="product.product_name" loading="lazy" id="productImg">
 
@@ -42,6 +42,7 @@
                     </p>
 
                   <router-link @click="fetchProduct(product.product_id)" :to="{ name: 'product', params: { productId: product.product_id }} " class="btn btn-dark"  v-if="$cookies.get('jwt')">details <i class="fa-regular fa-eye fa-sm" style="color: #ffffff;"></i></router-link>
+                  <router-link to="/login" class="regText" v-else>Click here to Log in or register first!</router-link>
 
                 </div>
 
@@ -93,20 +94,6 @@ export default {
             }
 
         }
-        // sortByPcs() {
-        //     if (!this.$store.state.products || !Array.isArray(this.$store.state.products)) {
-        //         console.error("Products array is missing or not valid.");
-        //         return [];
-        //     }
-
-        //     let storageArr = this.$store.state.products;
-        //     let resultY = storageArr.filter(prod => {
-        //         return prod.product_category === 'Gaming pc';
-        //     });
-        //     console.log(resultY);
-
-        //     return resultY;
-        // },
     },
      mounted(){
         this.fetchProducts(),
@@ -127,6 +114,21 @@ export default {
     #cardBox{
         display: grid;
         grid-template-columns: repeat(4, 1fr);
+    }
+
+    #productImg:hover{
+        transition: all 1s ease-in-out;
+        border-image: fill 0 linear-gradient(rgb(249, 249, 249), rgb(140, 79, 215), rgb(249, 249, 249));
+        transition: all 1s ease-in-out;
+    }
+
+    #cardBody:hover{
+        color: blueviolet;
+    }
+
+    .regText{
+        text-decoration: none;
+        color: rgb(0, 8, 255);
     }
 
     #productImg{

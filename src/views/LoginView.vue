@@ -20,10 +20,10 @@
                     <label for="floatingRole" v-if="this.user_email === 'JD1@gmail.com'">Specify your role to access as admin</label>
                   </div>
                   <div class="d-flex gap-1 mt-2">
-                    <button class="w-100 btn btn-lg btn-primary" type="submit" @click="loginUser()">login</button>
+                    <button class="w-100 btn" type="submit" @click="loginUser()">Login</button>
                   </div>
                   <hr class="my-4">
-                  <small><router-link to="/signup"  class="text-white">Click here to create an account</router-link></small>
+                  <small>No account?<router-link to="/signup"  class="text-white">Click here to create an account</router-link></small>
                 <div id="eerTxt"></div>
               </div>
             </div>
@@ -72,18 +72,71 @@ export default {
   z-index: 50;
 }
 
-/* #form::after{
-  content: '.';
-  color: black;
-  transform: skew(0deg);
-  height: 50%;
-  width: 100%;
-  background: linear-gradient(rgb(130, 137, 238), lightblue);
-  filter: blur(5px);
-  z-index: -1;
+button {
+  --border-radius: 15px;
+  --border-width: 4px;
+  appearance: none;
+  position: relative;
+  padding: 1em 2em;
+  border: 0;
+  background-color: #21212100;
+  font-family: "Roboto", Arial, "Segoe UI", sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  color: #fff;
+  z-index: 2;
+ }
+ 
+ button::after {
+  --m-i: linear-gradient(#000, #000);
+  --m-o: content-box, padding-box;
+  content: "";
   position: absolute;
-  right: 0;
-  bottom: 20%;
-} */
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  padding: var(--border-width);
+  border-radius: var(--border-radius);
+  background-image: conic-gradient(
+     #488cfb,
+     #29dbbc,
+     #ddf505,
+     #ff9f0e,
+     #e440bb,
+     #655adc,
+     #488cfb
+   );
+  -webkit-mask-image: var(--m-i), var(--m-i);
+  mask-image: var(--m-i), var(--m-i);
+  -webkit-mask-origin: var(--m-o);
+  mask-origin: var(--m-o);
+  -webkit-mask-clip: var(--m-o);
+  mask-clip: var(--m-o);
+  mask-composite: exclude;
+  -webkit-mask-composite: destination-out;
+  filter: hue-rotate(0);
+  animation: rotate-hue linear 500ms infinite;
+  animation-play-state: paused;
+ }
+ 
+ button:hover::after {
+  animation-play-state: running;
+ }
+ 
+ @keyframes rotate-hue {
+  to {
+   filter: hue-rotate(1turn);
+  }
+ }
+ 
+ button,
+ button::after {
+  box-sizing: border-box;
+ }
+ 
+ button:active {
+  --border-width: 5px;
+ }
     
 </style>

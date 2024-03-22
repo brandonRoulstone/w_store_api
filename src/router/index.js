@@ -52,6 +52,11 @@ const routes = [
     name: 'cart',
     component: () => import('../views/CartView.vue')
   },
+  {
+    path: '/contact',
+    name: 'contact',
+    component: () => import('../views/ContactView.vue')
+  },
 ]
 
 const router = createRouter({
