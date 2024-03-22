@@ -58,7 +58,7 @@
                 </div>
                 <div class="py-2 my-3 px-4 d-flex gap-2 border-top">
                     <button @click="addToFavs(cart)" class="btn bg-white shadow border text-white" :title="'add ' + cart.prodName + ' to favourites'"><i class="fa-regular fa-heart fa-lg fa-beat" style="color: #ff0000;"></i></button>
-                    <button @click="deleteFromCart(cart.prodID)"  class="btn bg-black text-white w-100">Delete</button>
+                    <button @click="deleteFromCart(cart.prodID)"  class="btn bg-black text-white w-100">Decrease quantity</button>
                 </div>
             </div>
             <div class="py-3 my-1 px-4">
