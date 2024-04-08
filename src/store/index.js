@@ -94,7 +94,7 @@ export default createStore({
       try {
         const res = await axios.post(`https://w-store-api.onrender.com/users`, userpayload)
 
-        await swal(`Welcome to W-store ${u.user_profile}!`, "You have successfully created an acccount", "success");
+        await swal(`Welcome to W-store ${userpayload.user_profile}!`, "You have successfully created an acccount", "success");
 
         await router.push('/login')
 

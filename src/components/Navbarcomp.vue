@@ -9,7 +9,7 @@
                 <span class="navbar-toggler-icon"></span>
               </button>
               <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-                <div class="navbar-nav">
+                <div class="navbar-nav ms-auto">
                     <router-link class="nav-link" to="/">Home</router-link>
                     <router-link class="nav-link" to="/about">About</router-link> 
                     <router-link class="nav-link" to="/products">products</router-link> 
