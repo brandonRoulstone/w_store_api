@@ -16,9 +16,9 @@
               </div>
               <div class="form-floating mt-2">
 
-                <input type="text" name="text" class="form-control" id="floatingInput" placeholder="FirstName">
+                <input type="text" name="text" class="form-control" id="floatingInput" placeholder="LastName">
 
-                <label for="floatingInput">FirstName</label>
+                <label for="floatingInput">LastName</label>
 
               </div>
           
